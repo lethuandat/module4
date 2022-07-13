@@ -15,6 +15,7 @@
 <form method="post">
   <input type="text" name="txtSearch" placeholder="Enter your word: "/>
   <input type = "submit" id = "submit" value = "Search"/>
+  <h3>Translate: ${translate}</h3>
 </form>
 </body>
 </html>
