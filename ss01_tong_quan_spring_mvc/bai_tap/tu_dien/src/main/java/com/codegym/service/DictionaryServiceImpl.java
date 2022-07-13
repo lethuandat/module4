@@ -11,6 +11,11 @@ public class DictionaryServiceImpl implements DictionaryService{
 
     @Override
     public String translate(String txtSearch) {
-        return dictionaryRepository.translate(txtSearch);
+        String result = dictionaryRepository.translate(txtSearch);
+        if (result != null) {
+            return result;
+        } else {
+            return "Not found!";
+        }
     }
 }

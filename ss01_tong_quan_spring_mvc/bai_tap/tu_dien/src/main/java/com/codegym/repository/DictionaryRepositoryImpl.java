@@ -19,10 +19,6 @@ public class DictionaryRepositoryImpl implements DictionaryRepository{
 
     @Override
     public String translate(String txtSearch) {
-        if (dictionary.get(txtSearch) != null) {
-            return dictionary.get(txtSearch);
-        } else {
-            return "Not found!";
-        }
+        return dictionary.get(txtSearch);
     }
 }
