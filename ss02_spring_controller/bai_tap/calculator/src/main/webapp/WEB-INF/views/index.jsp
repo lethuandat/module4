@@ -11,7 +11,7 @@
         <table>
             <tr>
                 <td>First operand:</td>
-                <td><input name="firstOperand" type="text"/></td>
+                <td><input name="firstOperand" type="number" required/></td>
             </tr>
             <tr>
                 <td>Operator:</td>
@@ -26,7 +26,7 @@
             </tr>
             <tr>
                 <td>Second operand:</td>
-                <td><input name="secondOperand" type="text"/></td>
+                <td><input name="secondOperand" type="number" required/></td>
             </tr>
             <tr>
                 <td>Result: ${result}</td>

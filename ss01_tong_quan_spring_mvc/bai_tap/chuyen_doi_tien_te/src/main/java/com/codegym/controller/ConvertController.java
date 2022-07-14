@@ -21,6 +21,8 @@ public class ConvertController {
     @PostMapping
     public String convertCurrency(@RequestParam double rate, double usd, Model model) {
         double result = convertService.convert(rate, usd);
+        model.addAttribute("rate", rate);
+        model.addAttribute("usd", usd);
         model.addAttribute("result", result);
         return "index";
     }
