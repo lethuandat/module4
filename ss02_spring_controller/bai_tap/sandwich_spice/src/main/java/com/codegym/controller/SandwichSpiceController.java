@@ -19,7 +19,7 @@ public class SandwichSpiceController {
     }
 
     @PostMapping
-    public String addSpice(Model model, @RequestParam("condiment") String[] condiment) {
+    public String addSpice(Model model, @RequestParam(value = "condiment", defaultValue = "None") String[] condiment) {
         String spice = sandwichSpiceService.save(condiment);
         model.addAttribute("spice", spice);
         return "index";
