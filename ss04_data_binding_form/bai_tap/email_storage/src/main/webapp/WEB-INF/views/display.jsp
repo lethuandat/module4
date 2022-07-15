@@ -1,4 +1,3 @@
-
 <%--
   Created by IntelliJ IDEA.
   User: PC
@@ -32,12 +31,13 @@
             <td>${email.signature}</td>
             <td>
                 <a href="/update?id=${email.id}">
-                    <input type="button" value="Edit">
+                    <button>
+                        Sửa
+                    </button>
                 </a>
             </td>
         </tr>
     </c:forEach>
-
 </table>
 </body>
 </html>

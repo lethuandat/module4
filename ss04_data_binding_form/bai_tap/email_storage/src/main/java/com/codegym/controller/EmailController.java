@@ -2,8 +2,6 @@ package com.codegym.controller;
 
 import com.codegym.model.Email;
 import com.codegym.service.EmailService;
-import com.codegym.service.LanguageService;
-import com.codegym.service.PageSizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +17,6 @@ public class EmailController {
     @Autowired
     EmailService emailService;
 
-    @Autowired
-    PageSizeService pageSizeService;
-
-    @Autowired
-    LanguageService languageService;
-
     @GetMapping("/display")
     public ModelAndView showList() {
         ModelAndView modelAndView = new ModelAndView("display");
@@ -37,8 +29,8 @@ public class EmailController {
     public ModelAndView showUpdate(@RequestParam Integer id) {
         ModelAndView modelAndView = new ModelAndView("update");
         modelAndView.addObject("email", emailService.findOne(id));
-        modelAndView.addObject("languageArr", languageService.showAll());
-        modelAndView.addObject("pageSizeArr", pageSizeService.showAll());
+        modelAndView.addObject("languageArr", emailService.showLanguage());
+        modelAndView.addObject("pageSizeArr", emailService.showPageSize());
         return modelAndView;
     }
 

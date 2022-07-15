@@ -27,4 +27,14 @@ public class EmailServiceImpl implements EmailService {
     public void save(Integer id, Email email) {
         emailRepository.save(id, email);
     }
+
+    @Override
+    public List<String> showLanguage() {
+        return emailRepository.showLanguage();
+    }
+
+    @Override
+    public List<Integer> showPageSize() {
+        return emailRepository.showPageSize();
+    }
 }

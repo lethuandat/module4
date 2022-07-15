@@ -10,4 +10,8 @@ public interface EmailRepository {
     Email findOne(Integer id);
 
     void save(Integer id, Email email);
+
+    List<String> showLanguage();
+
+    List<Integer> showPageSize();
 }

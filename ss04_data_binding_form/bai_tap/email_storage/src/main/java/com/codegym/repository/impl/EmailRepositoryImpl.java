@@ -19,6 +19,38 @@ public class EmailRepositoryImpl implements EmailRepository {
         emailList.add(new Email(4, "Vietnamese", 15, true, "Le Quy"));
     }
 
+    private static final List<String> languageList;
+
+    static {
+        languageList = new ArrayList<>();
+        languageList.add("English");
+        languageList.add("Vietnamese");
+        languageList.add("Japanese");
+        languageList.add("Chinese");
+    }
+
+    private static final List<Integer> pageSizeList;
+
+    static {
+        pageSizeList = new ArrayList<>();
+        pageSizeList.add(5);
+        pageSizeList.add(10);
+        pageSizeList.add(15);
+        pageSizeList.add(25);
+        pageSizeList.add(50);
+        pageSizeList.add(100);
+    }
+
+    @Override
+    public List<Integer> showPageSize() {
+        return pageSizeList;
+    }
+
+    @Override
+    public List<String> showLanguage() {
+        return languageList;
+    }
+
     @Override
     public List<Email> findAll() {
         return emailList;
