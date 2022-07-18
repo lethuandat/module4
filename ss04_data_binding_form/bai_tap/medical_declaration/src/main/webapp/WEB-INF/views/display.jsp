@@ -7,6 +7,7 @@
 </head>
 <body>
 <h2 class="text-center">Danh sách tờ khai y tế</h2>
+<h4>${message}</h4>
 <table class="table table-light">
     <tr class="bg-primary">
         <th>STT</th>
