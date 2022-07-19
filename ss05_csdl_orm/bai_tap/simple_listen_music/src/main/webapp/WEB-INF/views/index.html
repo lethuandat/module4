@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Song list</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<div class="container">
+    <div class="row">
+        <h2 align="center">List of song</h2>
+    </div>
+    <div class="row">
+        <p>
+            <a th:href="@{/create}">
+                Add new song
+            </a>
+        </p>
+    </div>
+</div>
+
+
+<body>
+<div class="container">
+    <div class="row">
+        <table class="table table-bordered border-primary">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Singer</th>
+                <th>Type</th>
+                <th>Link</th>
+                <th>Edit</th>
+                <th>Remove</th>
+            </tr>
+            <tr th:each="song : ${songList}">
+                <td th:text="${song.getId()}"></td>
+                <td th:text="${song.getName()}"></td>
+                <td th:text="${song.getSinger()}"></td>
+                <td th:text="${song.getType()}"></td>
+                <td th:text="${song.getLinkUrl()}"></td>
+                <td><a th:href="@{/edit/{id}(id=${song.getId()})}">edit</a></td>
+                <td><a th:href="@{/delete/{id}(id=${song.getId()})}">remove</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</html>
