@@ -12,10 +12,6 @@
     <div class="row">
         <form th:action="@{/create}" th:object="${song}" method="post">
             <div>
-                <label>ID</label>
-                <input class="form-control" type="text" th:field="*{id}"/>
-            </div>
-            <div>
                 <label>Name</label>
                 <input class="form-control" type="text" th:field="*{name}"/>
             </div>
@@ -31,7 +27,7 @@
                 <label>Link Url</label>
                 <input class="form-control" type="text" th:field="*{linkUrl}"/>
             </div>
-            <div>
+            <div class="mt-4">
                 <a th:href="@{/index}">
                     <input type="button" class="btn btn-outline-success" value="Back"/>
                 </a>

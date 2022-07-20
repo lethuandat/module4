@@ -41,7 +41,38 @@
                 <td th:text="${song.getType()}"></td>
                 <td th:text="${song.getLinkUrl()}"></td>
                 <td><a th:href="@{/edit/{id}(id=${song.getId()})}">edit</a></td>
-                <td><a th:href="@{/delete/{id}(id=${song.getId()})}">remove</a></td>
+                <!--       Xoa = modal         -->
+                <td>
+
+                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                            th:data-bs-target="'#deleteModal' + ${song.getId()}">
+                        Delete
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" th:id="deleteModal + ${song.getId()}" data-bs-backdrop="static"
+                         data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel">Notification</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Do you want delete song name: <span class="text-info" th:text="${song.getName()}"></span>
+<!--                                    with id = <span class="text-info" th:text="${song.getId()}"></span>-->
+                                </div>
+                                <div class="modal-footer">
+                                    <a th:href="@{/delete/{id}(id=${song.getId()})}" class="btn btn-secondary" >Delete</a>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </td>
             </tr>
         </table>
     </div>
