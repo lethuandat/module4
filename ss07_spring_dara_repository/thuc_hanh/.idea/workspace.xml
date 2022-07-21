@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bdada179-84de-4f17-87ca-74f9ef7a88d6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../ss05_csdl_orm/bai_tap/simple_listen_music/.gradle/6.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../ss05_csdl_orm/bai_tap/simple_listen_music/.gradle/6.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ss05_csdl_orm/bai_tap/simple_listen_music/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../ss05_csdl_orm/bai_tap/simple_listen_music/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ss05_csdl_orm/thuc_hanh/customer-management" beforeDir="false" afterPath="$PROJECT_DIR$/../../ss05_csdl_orm/thuc_hanh/customer-management" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ss06_jpa/thuc_hanh/spring-customer-management" beforeDir="false" afterPath="$PROJECT_DIR$/../../ss06_jpa/thuc_hanh/spring-customer-management" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ss06_jpa/thuc_hanh/spring-jpa-stored-procedure" beforeDir="false" afterPath="$PROJECT_DIR$/../../ss06_jpa/thuc_hanh/spring-jpa-stored-procedure" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-customer-management-provinces/src/main/java/com/codegym/cms/configuration/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-customer-management-provinces/src/main/java/com/codegym/cms/configuration/AppConfig.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="2CDOrg2qPr9VUglJJhEOme6wwhC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/spring-customer-management-paging-sorting" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bdada179-84de-4f17-87ca-74f9ef7a88d6" name="Default Changelist" comment="" />
+      <created>1658333888549</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1658333888549</updated>
+      <workItem from="1658333893027" duration="9000" />
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1658333901748">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1658333901748" />
+  </component>
+</project>

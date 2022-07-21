@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<body>
+<h3>View Detail Product</h3>
+<p>
+    <a th:href="@{/product}">
+        Back to product list
+    </a>
+</p>
+<div id="detail">
+    <div class="productDetail">
+        <label>ID:</label>
+        <input type="text"  readonly th:field="${product.id}">
+    </div>
+    <div class="productDetail">
+        <label>Name:</label>
+        <input type="text" readonly th:field="${product.name}">
+    </div>
+    <div class="productDetail">
+        <label>Produce:</label>
+        <input type="text" readonly th:field="${product.produce}">
+    </div>
+    <div class="productDetail">
+        <label>Quantity:</label>
+        <input type="text" readonly th:field="${product.quantity}">
+    </div>
+    <div class="productDetail">
+        <label>Price:</label>
+        <input type="text" readonly th:field="${product.price}">
+    </div>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
