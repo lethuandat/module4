@@ -8,22 +8,34 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vn.codegym.blog.model.Blog;
+import vn.codegym.blog.model.Category;
 import vn.codegym.blog.service.IBlogService;
+import vn.codegym.blog.service.ICategoryService;
+
+import java.util.List;
 
 @Controller
+@RequestMapping("/blog")
 public class BlogController {
     @Autowired
     IBlogService iBlogService;
 
+    @Autowired
+    ICategoryService iCategoryService;
+
     @GetMapping
     public String showBlog(@PageableDefault(value = 3) Pageable pageable, Model model) {
+        List<Category> categoryList = iCategoryService.findAll();
         Page<Blog> blogList = iBlogService.findAll(pageable);
+
         model.addAttribute("blogList", blogList);
+        model.addAttribute("categoryList", categoryList);
         return "blog";
     }
 
     @GetMapping("/create")
     public String createForm(Model model) {
+        model.addAttribute("categoryList", iCategoryService.findAll());
         model.addAttribute("blog", new Blog());
         return "create";
     }
@@ -31,11 +43,12 @@ public class BlogController {
     @PostMapping("/create")
     public String create(@ModelAttribute("blog") Blog blog) {
         iBlogService.save(blog);
-        return "redirect:";
+        return "redirect:/blog";
     }
 
     @GetMapping("/edit/{id}")
     public String editForm(@PathVariable int id, Model model) {
+        model.addAttribute("categoryList", iCategoryService.findAll());
         model.addAttribute("blog", iBlogService.findById(id));
         return "update";
     }
@@ -43,7 +56,7 @@ public class BlogController {
     @PostMapping("/update")
     public String update(Blog blog) {
         iBlogService.save(blog);
-        return "redirect:";
+        return "redirect:/blog";
     }
 
     @GetMapping("/view/{id}")

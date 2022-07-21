@@ -9,28 +9,34 @@
 </head>
 <body>
 <div class="container">
-
     <div class="row">
-        <h2 th:text="${blog.topic}" align="center"></h2>
+        <h2 align="center">BLOG DETAIL</h2>
     </div>
-
     <div class="row">
-            <table class="table table-primary table-striped">
+            <table class="table table-primary table-striped" th:object="${blog}">
                 <tr>
-                    <td>Name</td>
-                    <td><label type="text" th:text="${blog.name}"></label></td>
+                    <td>Category:</td>
+                    <td><input disabled type="text" th:field="*{category.name}"></td>
+                </tr>
+                <tr>
+                    <td>ID</td>
+                    <td><input disabled type="text" th:field="*{id}"></td>
                 </tr>
                 <tr>
                     <td>Content</td>
-                    <td><label type="text" th:utext="${blog.content}"></label></td>
+                    <td><input disabled type="text" th:field="*{content}"></td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td><input disabled type="text" th:field="*{name}"></td>
                 </tr>
                 <tr>
                     <td>Status</td>
-                    <td><label type="text" th:text="${blog.status}"></label></td>
+                    <td><input disabled type="text" th:field="*{status}"></td>
                 </tr>
                 <tr>
                     <td>
-                        <a th:href="@{/}">
+                        <a th:href="@{/blog}">
                             <input type="button" class="btn btn-outline-success" value="Back"/>
                         </a>
                     </td>

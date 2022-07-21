@@ -15,15 +15,19 @@
     </div>
 
     <div class="row">
-        <form th:action="@{/create}" method="post" th:object="${blog}">
+        <form th:action="@{/blog/create}" method="post" th:object="${blog}">
         <table class="table table-primary table-striped">
             <tr>
                 <td>Name</td>
                 <td><input type="text" th:field="*{name}"></td>
             </tr>
             <tr>
-                <td>Topic</td>
-                <td><input type="text" th:field="*{topic}"></td>
+                <td>Category</td>
+                <td>
+                    <select th:field="*{category}">
+                        <option th:each="item : ${categoryList}" th:value="${item.id}" th:text="${item.name}"></option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>Content</td>
@@ -35,7 +39,7 @@
             </tr>
             <tr>
                 <td>
-                    <a th:href="@{/}">
+                    <a th:href="@{/blog}">
                         <input type="button" class="btn btn-outline-success" value="Back"/>
                     </a>
                 </td>
