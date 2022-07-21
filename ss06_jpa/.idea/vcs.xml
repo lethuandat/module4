@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/practice/spring-customer-management" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/practice/spring-jpa-stored-procedure" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/thuc_hanh/spring-customer-management" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/thuc_hanh/spring-jpa-stored-procedure" vcs="Git" />
+  </component>
+</project>

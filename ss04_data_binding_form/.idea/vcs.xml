@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/practice/upload_file2/spring-upload-file" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/thuc_hanh/upload_file2/spring-upload-file" vcs="Git" />
+  </component>
+</project>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ss04_data_binding_form/thuc_hanh/upload_file2/spring-upload-file" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ss05_csdl_orm/thuc_hanh/customer-management" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ss06_jpa/thuc_hanh/spring-customer-management" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ss06_jpa/thuc_hanh/spring-jpa-stored-procedure" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ss07_spring_dara_repository/thuc_hanh/spring-customer-management-paging-sorting" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ss07_spring_dara_repository/thuc_hanh/spring-customer-management-provinces" vcs="Git" />
+  </component>
+</project>

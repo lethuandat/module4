@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/practice/spring-customer-management-paging-sorting" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/practice/spring-customer-management-provinces" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/thuc_hanh/spring-customer-management-paging-sorting" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/thuc_hanh/spring-customer-management-provinces" vcs="Git" />
+  </component>
+</project>
