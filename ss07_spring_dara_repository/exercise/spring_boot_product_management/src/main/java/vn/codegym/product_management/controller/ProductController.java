@@ -11,8 +11,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.codegym.product_management.model.Product;
 import vn.codegym.product_management.service.ProductService;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/product")
 public class ProductController {
@@ -78,8 +76,8 @@ public class ProductController {
     }
 
     @PostMapping("/search")
-    public String search(@RequestParam("keyword") String keyword, Model model) {
-        List<Product> products = productService.searchByKeyword(keyword);
+    public String search(@PageableDefault(value = 3) Pageable pageable, @RequestParam("keyword") String keyword, Model model) {
+        Page<Product> products = productService.search(keyword, pageable);
         model.addAttribute("products", products);
         return "/index";
     }

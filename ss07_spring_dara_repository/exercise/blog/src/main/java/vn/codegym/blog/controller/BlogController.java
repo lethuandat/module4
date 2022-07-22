@@ -14,7 +14,6 @@ import vn.codegym.blog.service.IBlogService;
 import vn.codegym.blog.service.ICategoryService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/blog")
@@ -26,15 +25,9 @@ public class BlogController {
     ICategoryService iCategoryService;
 
     @GetMapping
-    public String showBlog(@RequestParam("keySearch") Optional<String> keySearch, @PageableDefault(value = 5) Pageable pageable, Model model) {
+    public String showBlog(@PageableDefault(value = 5) Pageable pageable, Model model) {
         List<Category> categoryList = iCategoryService.findAll();
-        Page<Blog> blogList;
-
-        if (keySearch.isPresent()) {
-            blogList = iBlogService.findAllByNameContaining(keySearch.get(), pageable);
-        } else {
-            blogList = iBlogService.findAll(pageable);
-        }
+        Page<Blog> blogList = iBlogService.findAll(pageable);
 
         model.addAttribute("blogList", blogList);
         model.addAttribute("categoryList", categoryList);
@@ -87,5 +80,15 @@ public class BlogController {
     public String delete(@RequestParam int id) {
         iBlogService.remove(id);
         return "redirect:";
+    }
+
+    @PostMapping("/search")
+    public String search(@PageableDefault(value = 5) Pageable pageable, @RequestParam("keyword") String keyword, Model model) {
+        Page<Blog> blogList = iBlogService.find(keyword, pageable);
+        List<Category> categoryList = iCategoryService.findAll();
+
+        model.addAttribute("blogList", blogList);
+        model.addAttribute("categoryList", categoryList);
+        return "blog";
     }
 }

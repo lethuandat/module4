@@ -33,6 +33,7 @@
                     Category list
                 </button>
             </a>
+
         </div>
         <div class="col-lg-4">
             <a th:href="@{/blog/sort}">
@@ -45,13 +46,15 @@
     </div>
 
     <div class="row mt-4">
-        <form>
-            <input type="text" name="keySearch">
-            <input type="submit" value="Search">
+        <form th:action="@{/blog/search}" method="POST" novalidate="novalidate">
+            <label>Search</label>
+            <input type="text" name="keyword">
+            <input type="submit" value="Search"/>
         </form>
     </div>
 
     <div class="row mt-4">
+        <span>There are [[${blogList.totalElements}]] blog(s).</span>
         <table class="table table-primary table-striped">
             <tr>
                 <th>STT</th>

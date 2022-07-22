@@ -8,7 +8,6 @@ import vn.codegym.product_management.model.Product;
 import vn.codegym.product_management.repository.ProductRepository;
 import vn.codegym.product_management.service.ProductService;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> searchByKeyword(String keyword) {
-        return productRepository.findByNameOrProduce("%" + keyword + "%");
+    public Page<Product> search(String keyword, Pageable pageInfo) {
+        return productRepository.findAllByNameContainsOrProduceContains(keyword, keyword, pageInfo);
     }
 }

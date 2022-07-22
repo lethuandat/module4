@@ -4,7 +4,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import vn.codegym.product_management.model.Product;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
@@ -16,5 +15,5 @@ public interface ProductService {
 
     void remove(int id);
 
-    List<Product> searchByKeyword(String keyword);
+    Page<Product> search(String keyword, Pageable pageInfo);
 }

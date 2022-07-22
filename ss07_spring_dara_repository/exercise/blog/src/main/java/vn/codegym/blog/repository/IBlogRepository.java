@@ -9,7 +9,5 @@ import javax.transaction.Transactional;
 
 @Transactional
 public interface IBlogRepository extends JpaRepository<Blog, Integer> {
-    Page<Blog> findAll(Pageable pageable);
-
-    Page<Blog> findAllByNameContaining(String name, Pageable pageable);
+    Page<Blog> findAllByNameContains(String name, Pageable pageable);
 }
