@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+    <style>
+        span {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{/edit}" method="post" th:object="${songDto}">
+    <table width="500px">
+        <tr>
+            <td>ID</td>
+            <td><input readonly type="text" th:field="*{id}"></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td><input type="text" th:field="*{name}"></td>
+            <td><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></td>
+        </tr>
+        <tr>
+            <td>Artist</td>
+            <td><input type="text" th:field="*{artist}"></td>
+            <td><span th:if="${#fields.hasErrors('artist')}" th:errors="*{artist}"></span></td>
+        </tr>
+        <tr>
+            <td>Type</td>
+            <td><input type="text" th:field="*{type}"></td>
+            <td><span th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span></td>
+        </tr>
+        <tr>
+            <td>
+                <a th:href="@{/song}">
+                    <input type="button" class="btn btn-outline-success" value="Back"/>
+                </a>
+            </td>
+            <td>
+                <input type="submit" class="btn btn-outline-success" value="Save"/>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

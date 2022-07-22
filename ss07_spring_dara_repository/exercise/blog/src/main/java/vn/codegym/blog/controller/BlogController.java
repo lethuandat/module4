@@ -30,7 +30,7 @@ public class BlogController {
         List<Category> categoryList = iCategoryService.findAll();
         Page<Blog> blogList;
 
-        if(keySearch.isPresent()){
+        if (keySearch.isPresent()) {
             blogList = iBlogService.findAllByNameContaining(keySearch.get(), pageable);
         } else {
             blogList = iBlogService.findAll(pageable);

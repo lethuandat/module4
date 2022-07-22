@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List</title>
+</head>
+<body>
+<p>
+    <a th:href="@{/create}">
+        Add new song
+    </a>
+</p>
+<p th:text="${message}"></p>
+<table border="1" width="500px">
+    <tr>
+        <th>STT</th>
+        <th>Name</th>
+        <th>Artist</th>
+        <th>Type</th>
+        <th>Edit</th>
+    </tr>
+    <tr th:each="item, iterater : ${songList}">
+        <td th:text="${iterater.count}"></td>
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.artist}"></td>
+        <td th:text="${item.type}"></td>
+        <td><a th:href="@{/edit/{id}(id = ${item.id})}">Edit</a></td>
+    </tr>
+</table>
+</body>
+</html>

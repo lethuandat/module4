@@ -64,7 +64,7 @@
                 <th>View</th>
             </tr>
             <tr th:each="blog, iteration : ${blogList}">
-                <td th:text="${iteration.index + 1}"></td>
+                <td th:text="${iteration.count}"></td>
                 <td th:text="${blog.getName()}"></td>
                 <td th:text="${blog.category.getName()}"></td>
                 <td th:text="${blog.getDateCreate}"></td>
