@@ -39,7 +39,7 @@
     </thead>
     <tbody>
     <tr th:each="row,rowStat : ${products}">
-        <td th:text="${rowStat.index + 1}"></td>
+        <td th:text="${rowStat.count}"></td>
         <td th:text="${row.getName()}"></td>
         <td th:text="${row.getProduce()}"></td>
         <td th:text="${row.getQuantity()}"></td>

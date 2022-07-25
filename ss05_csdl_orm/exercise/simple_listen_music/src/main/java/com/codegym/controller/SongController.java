@@ -5,10 +5,7 @@ import com.codegym.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,8 +41,10 @@ public class SongController {
     }
 
     @PostMapping("update")
-    public String edit(@ModelAttribute("song") Song song) {
-        songService.update(song.getId(), song);
+    public String edit(@RequestParam("editId") int id, @RequestParam("editName") String name) {
+        Song song = new Song();
+        song = songService.findById(id);
+        song.setName(name);
         return "redirect:/index";
     }
 
