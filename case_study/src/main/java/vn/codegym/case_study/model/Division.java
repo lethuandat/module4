@@ -10,7 +10,7 @@ public class Division {
     private int divisionId;
     private String divisionName;
 
-    @OneToMany(mappedBy = "divisionId")
+    @OneToMany(mappedBy = "division")
     private Set<Employee> employee;
 
     public Division() {

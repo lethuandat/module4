@@ -14,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.codegym.product_management.dto.ProductDto;
 import vn.codegym.product_management.model.Product;
 import vn.codegym.product_management.service.ProductService;
-
 @Controller
 @RequestMapping("/product")
 public class ProductController {

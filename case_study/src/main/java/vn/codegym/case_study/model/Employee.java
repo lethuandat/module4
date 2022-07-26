@@ -17,15 +17,15 @@ public class Employee {
 
     @ManyToOne
     @JoinColumn(name = "position_id", referencedColumnName = "positionId")
-    private Position positionId;
+    private Position position;
 
     @ManyToOne
     @JoinColumn(name = "education_degree_id", referencedColumnName = "educationDegreeId")
-    private EducationDegree educationDegreeId;
+    private EducationDegree educationDegree;
 
     @ManyToOne
     @JoinColumn(name = "division_id", referencedColumnName = "divisionId")
-    private Division divisionId;
+    private Division division;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username", referencedColumnName = "username")
@@ -34,7 +34,21 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(Integer id, String name, String birthDay, String idCard, Double salary, String phone, String email, String address, Position positionId, EducationDegree educationDegreeId, Division divisionId, User username) {
+    public Employee(String name, String birthDay, String idCard, Double salary, String phone, String email, String address, Position position, EducationDegree educationDegree, Division division, User username) {
+        this.name = name;
+        this.birthDay = birthDay;
+        this.idCard = idCard;
+        this.salary = salary;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.position = position;
+        this.educationDegree = educationDegree;
+        this.division = division;
+        this.username = username;
+    }
+
+    public Employee(Integer id, String name, String birthDay, String idCard, Double salary, String phone, String email, String address, Position position, EducationDegree educationDegree, Division division, User username) {
         this.id = id;
         this.name = name;
         this.birthDay = birthDay;
@@ -43,9 +57,9 @@ public class Employee {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.positionId = positionId;
-        this.educationDegreeId = educationDegreeId;
-        this.divisionId = divisionId;
+        this.position = position;
+        this.educationDegree = educationDegree;
+        this.division = division;
         this.username = username;
     }
 
@@ -113,28 +127,28 @@ public class Employee {
         this.address = address;
     }
 
-    public Position getPositionId() {
-        return positionId;
+    public Position getPosition() {
+        return position;
     }
 
-    public void setPositionId(Position positionId) {
-        this.positionId = positionId;
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
-    public EducationDegree getEducationDegreeId() {
-        return educationDegreeId;
+    public EducationDegree getEducationDegree() {
+        return educationDegree;
     }
 
-    public void setEducationDegreeId(EducationDegree educationDegreeId) {
-        this.educationDegreeId = educationDegreeId;
+    public void setEducationDegree(EducationDegree educationDegree) {
+        this.educationDegree = educationDegree;
     }
 
-    public Division getDivisionId() {
-        return divisionId;
+    public Division getDivision() {
+        return division;
     }
 
-    public void setDivisionId(Division divisionId) {
-        this.divisionId = divisionId;
+    public void setDivision(Division division) {
+        this.division = division;
     }
 
     public User getUsername() {

@@ -87,7 +87,7 @@
                 <div class="collapse navbar-collapse px-5" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 px-5">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/static">Home</a>
+                            <a class="nav-link active" aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/employee" target="_self">Employee</a>
@@ -156,6 +156,9 @@
             <div class="container-fluid">
                 <div class="row">
                     <caption><h2 align="center">Danh sách khách hàng</h2></caption>
+                    <div class="row text-primary" th:if="${message}">
+                        <h3 align="center" th:text="${message}"></h3>
+                    </div>
                     <form class="row g-3" th:action="@{/customer/search}" method="get">
                         <div class="col-auto">
                             <input type="text" hidden name="action" value="search">
@@ -246,13 +249,14 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="row text-primary" th:if="${message}">
-                    <span th:text="${message}"></span>
-                </div>
+
                 <div style="display: flex; color: #0a58ca; justify-content: center">
-                    <a th:href="@{'/customer'(page=${customerList.number - 1})}" th:if="${customerList.hasPrevious()}">Previous &nbsp;</a>
-                    <label th:text="${customerList.number + 1}"></label>&nbsp; / &nbsp; <label th:text="${customerList.totalPages}"></label>
-                    <a th:href="@{'/customer'(page=${customerList.number + 1})}" th:if="${customerList.hasNext()}">&nbsp; Next</a>
+                    <a th:href="@{'/customer'(page=${customerList.number - 1})}" th:if="${customerList.hasPrevious()}">Previous
+                        &nbsp;</a>
+                    <label th:text="${customerList.number + 1}"></label>&nbsp; / &nbsp; <label
+                        th:text="${customerList.totalPages}"></label>
+                    <a th:href="@{'/customer'(page=${customerList.number + 1})}" th:if="${customerList.hasNext()}">&nbsp;
+                        Next</a>
                 </div>
                 <div class="row">
                     <h2>

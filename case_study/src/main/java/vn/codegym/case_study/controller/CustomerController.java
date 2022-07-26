@@ -24,7 +24,7 @@ public class CustomerController {
     CustomerTypeService customerTypeService;
 
     @GetMapping
-    public String showCustomerList(@PageableDefault(value = 5) Pageable pageable, Model model) {
+    public String showPage(@PageableDefault(value = 5) Pageable pageable, Model model) {
         Page<Customer> customerList = customerService.findAll(pageable);
         List<CustomerType> customerTypeList = customerTypeService.findAll();
 
@@ -33,7 +33,6 @@ public class CustomerController {
 
         return "customer/list";
     }
-
 
     @GetMapping("/search")
     public String search(@PageableDefault(value = 5) Pageable pageable, String keyword, Model model) {
@@ -45,6 +44,7 @@ public class CustomerController {
 
         return "customer/list";
     }
+
     @GetMapping("/create")
     public String createForm(Model model) {
         List<CustomerType> customerTypeList = customerTypeService.findAll();

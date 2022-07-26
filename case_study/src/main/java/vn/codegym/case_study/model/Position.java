@@ -10,7 +10,7 @@ public class Position {
     private int positionId;
     private String positionName;
 
-    @OneToMany(mappedBy = "positionId")
+    @OneToMany(mappedBy = "position")
     private Set<Employee> employee;
 
     public Position() {
