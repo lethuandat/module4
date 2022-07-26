@@ -59,7 +59,7 @@ public class LendBookController {
     }
 
     @GetMapping("/pay")
-    public String payBook(@RequestParam("payBook") Long code,  RedirectAttributes redirectAttributes) {
+    public String payBook(@RequestParam("payBook") Long code, RedirectAttributes redirectAttributes) {
         UserLendBook userLendBook = userLendBookService.findByLendCode(code);
         if (userLendBook == null) {
             redirectAttributes.addFlashAttribute("message", "Mã sách không tồn tại!");
