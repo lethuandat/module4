@@ -1,6 +1,7 @@
 package vn.codegym.case_study.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity(name = "customer")
 public class Customer {
@@ -34,10 +35,13 @@ public class Customer {
     @Column(name = "customer_address")
     private String address;
 
+    @OneToMany(mappedBy = "customer")
+    private Set<Contract> contract;
+
     public Customer() {
     }
 
-    public Customer(Integer id, CustomerType customerType, String name, String birthDay, Integer gender, String idCard, String phone, String email, String address) {
+    public Customer(Integer id, CustomerType customerType, String name, String birthDay, Integer gender, String idCard, String phone, String email, String address, Set<Contract> contract) {
         this.id = id;
         this.customerType = customerType;
         this.name = name;
@@ -47,6 +51,7 @@ public class Customer {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.contract = contract;
     }
 
     public Integer getId() {
@@ -119,5 +124,13 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Set<Contract> getContract() {
+        return contract;
+    }
+
+    public void setContract(Set<Contract> contract) {
+        this.contract = contract;
     }
 }

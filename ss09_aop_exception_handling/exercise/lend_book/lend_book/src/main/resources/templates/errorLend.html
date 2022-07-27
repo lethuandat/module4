@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Error</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+<body style="background-color: navajowhite">
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6 mt-5 p-2">
+            <img src="https://media.baamboozle.com/uploads/images/50597/1622119560_156690_gif-url.gif"
+                 class="error-image" alt="error page">
+        </div>
+        <div class="col-md-6">
+            <span class="text-black error papyrus" style="font-family: Papyrus;font-size: 50px">Thư viện <strong
+                    class="text-danger"> Gặp lỗi!</strong> </span>
+            <br>
+            <h5 class="text-uppercase mt-4 font-weight-bold text-black">Đầu sách bạn chọn đang bị trống </h5>
+            <span style="color: red ">Vui lòng chọn sách khác!</span><br>
+            <div class="mt-4 text-center">
+                <a th:href="@{/book}" class="btn btn-outline-primary border-primary shadow-lg">Back To
+                    Book List <i class="fas fa-home"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -8,7 +8,6 @@ public class User {
     @Id
     private String username;
     private String password;
-
     @OneToOne(mappedBy = "username")
     private Employee employee;
 

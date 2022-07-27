@@ -43,10 +43,10 @@ public class LendBookController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("userLend") UserLendBook userLendBook, RedirectAttributes redirectAttributes) {
+    public String save(@ModelAttribute("userLend") UserLendBook userLendBook, RedirectAttributes redirectAttributes) throws Exception {
         Book book = bookService.findById(userLendBook.getBook().getId());
         if (book.getQuantity() == 0) {
-            redirectAttributes.addFlashAttribute("message", "Mượn thất bại, sách đã hết, bạn quay lại sau!");
+            throw new Exception();
         } else {
             book.setQuantity(book.getQuantity() - 1);
             bookService.save(book);
@@ -59,10 +59,10 @@ public class LendBookController {
     }
 
     @GetMapping("/pay")
-    public String payBook(@RequestParam("payBook") Long code, RedirectAttributes redirectAttributes) {
+    public String payBook(@RequestParam("payBook") Long code, RedirectAttributes redirectAttributes) throws Exception {
         UserLendBook userLendBook = userLendBookService.findByLendCode(code);
         if (userLendBook == null) {
-            redirectAttributes.addFlashAttribute("message", "Mã sách không tồn tại!");
+            throw new NullPointerException();
         } else {
             Book book = bookService.findById(userLendBook.getBook().getId());
             book.setQuantity(book.getQuantity() + 1);
@@ -73,4 +73,15 @@ public class LendBookController {
 
         return "redirect:/book";
     }
+
+    @ExceptionHandler(Exception.class)
+    public String showErrorLendPage() {
+        return "errorLend";
+    }
+
+    @ExceptionHandler(NullPointerException.class)
+    public String showErrorPayPage() {
+        return "errorPay";
+    }
+
 }

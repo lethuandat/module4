@@ -184,6 +184,7 @@
                             <th>Position</th>
                             <th>Education</th>
                             <th>Division</th>
+                            <th>User</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -203,6 +204,7 @@
                             <td th:text="${employee.position == null ? '' : employee.position.getPositionName()}"></td>
                             <td th:text="${employee.educationDegree == null ? '' : employee.educationDegree.getEducationDegreeName()}"></td>
                             <td th:text="${employee.division == null ? '' : employee.division.getDivisionName()}"></td>
+                            <td th:text="${employee.username == null ? '' : employee.username.getUsername()}"></td>
                             <td>
                                 <!-- Edit icon modal -->
                                 <a data-bs-toggle="modal" th:attr="data-bs-target='#editModal' + *{employee.id}">
@@ -296,6 +298,17 @@
                                                                     <option th:each="item : ${divisionList}"
                                                                             th:value="${item.divisionId}"
                                                                             th:text="${item.divisionName}"></option>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Username:</th>
+                                                            <td>
+                                                                <select class="form-select"
+                                                                        th:value="*{username}" name="username">
+                                                                    <option th:each="item : ${userList}"
+                                                                            th:value="${item.username}"
+                                                                            th:text="${item.username}"></option>
                                                                 </select>
                                                             </td>
                                                         </tr>
@@ -442,6 +455,16 @@
                                                         <option th:each="item : ${divisionList}"
                                                                 th:value="${item.divisionId}"
                                                                 th:text="${item.divisionName}"></option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Username:</th>
+                                                <td>
+                                                    <select class="form-select" name="newUsername">
+                                                        <option th:each="item : ${userList}"
+                                                                th:value="${item.username}"
+                                                                th:text="${item.username}"></option>
                                                     </select>
                                                 </td>
                                             </tr>

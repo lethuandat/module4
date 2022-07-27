@@ -11,14 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import vn.codegym.case_study.model.Division;
-import vn.codegym.case_study.model.EducationDegree;
-import vn.codegym.case_study.model.Employee;
-import vn.codegym.case_study.model.Position;
-import vn.codegym.case_study.service.DivisionService;
-import vn.codegym.case_study.service.EducationDegreeService;
-import vn.codegym.case_study.service.EmployeeService;
-import vn.codegym.case_study.service.PositionService;
+import vn.codegym.case_study.model.*;
+import vn.codegym.case_study.service.*;
 
 import java.util.List;
 
@@ -37,17 +31,22 @@ public class EmployeeController {
     @Autowired
     EducationDegreeService educationDegreeService;
 
+    @Autowired
+    UserService userService;
+
     @GetMapping
     public String showPage(@PageableDefault(value = 5) Pageable pageable, Model model) {
         Page<Employee> employeeList = employeeService.findAll(pageable);
         List<Division> divisionList = divisionService.findAll();
         List<Position> positionList = positionService.findAll();
         List<EducationDegree> educationDegreeList = educationDegreeService.findAll();
+        List<User> userList = userService.findAll();
 
         model.addAttribute("employeeList", employeeList);
         model.addAttribute("divisionList", divisionList);
         model.addAttribute("positionList", positionList);
         model.addAttribute("educationDegreeList", educationDegreeList);
+        model.addAttribute("userList", userList);
 
         return "employee/list";
     }

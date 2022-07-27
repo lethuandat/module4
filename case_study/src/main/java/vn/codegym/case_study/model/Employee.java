@@ -1,6 +1,7 @@
 package vn.codegym.case_study.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Employee {
@@ -31,10 +32,12 @@ public class Employee {
     @JoinColumn(name = "username", referencedColumnName = "username")
     private User username;
 
+    @OneToMany(mappedBy = "employee")
+    private Set<Contract> contract;
     public Employee() {
     }
-
-    public Employee(String name, String birthDay, String idCard, Double salary, String phone, String email, String address, Position position, EducationDegree educationDegree, Division division, User username) {
+    public Employee(Integer id, String name, String birthDay, String idCard, Double salary, String phone, String email, String address, Position position, EducationDegree educationDegree, Division division, User username, Set<Contract> contract) {
+        this.id = id;
         this.name = name;
         this.birthDay = birthDay;
         this.idCard = idCard;
@@ -46,10 +49,10 @@ public class Employee {
         this.educationDegree = educationDegree;
         this.division = division;
         this.username = username;
+        this.contract = contract;
     }
 
-    public Employee(Integer id, String name, String birthDay, String idCard, Double salary, String phone, String email, String address, Position position, EducationDegree educationDegree, Division division, User username) {
-        this.id = id;
+    public Employee(String name, String birthDay, String idCard, Double salary, String phone, String email, String address, Position position, EducationDegree educationDegree, Division division, User username) {
         this.name = name;
         this.birthDay = birthDay;
         this.idCard = idCard;
@@ -157,5 +160,13 @@ public class Employee {
 
     public void setUsername(User username) {
         this.username = username;
+    }
+
+    public Set<Contract> getContract() {
+        return contract;
+    }
+
+    public void setContract(Set<Contract> contract) {
+        this.contract = contract;
     }
 }
