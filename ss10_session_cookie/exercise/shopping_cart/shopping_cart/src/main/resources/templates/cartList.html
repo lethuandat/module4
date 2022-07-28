@@ -36,7 +36,7 @@
                     <img th:src="${productMap.key.image}" alt="" width="100px" height="auto">
                 </td>
                 <td>
-                    <span th:text="${productMap.key.price}"></span> USD
+                    <span th:text="${#numbers.formatCurrency(productMap.key.price)}"></span>
                 </td>
                 <td>
                     <a th:href="@{/cart/decrement(id=${productMap.key.id})}"
@@ -83,7 +83,7 @@
                 <td>Tổng tiền</td>
                 <td></td>
                 <td>
-                    <span th:text="${cart.countTotalPayment()}"></span> USD
+                    <span th:text="${#numbers.formatCurrency(cart.countTotalPayment())}"></span>
                 </td>
                 <td></td>
                 <td></td>

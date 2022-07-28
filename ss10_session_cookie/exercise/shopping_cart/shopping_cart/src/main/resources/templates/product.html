@@ -33,7 +33,7 @@
                         </a>
                     </td>
                     <td>
-                        <span th:text="${product.price}"></span> USD
+                        <h6 th:text="${#numbers.formatCurrency(product.price)}"></h6>
                     </td>
                     <td>
                         <a class="btn btn-outline-success" role="button" th:href="@{/product/add/__${product.id}__}">

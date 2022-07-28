@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Furama Resort</title>
+    <link rel="stylesheet" th:href="@{/bootstrap_502/css/bootstrap.min.css}">
+
+    <style>
+        #carouselExampleIndicators {
+            position: relative;
+        }
+
+        #furama-logo img {
+            position: absolute;
+            width: 48px;
+            height: 70px;
+            top: 20px;
+            left: 30px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            font-weight: bold;
+        }
+
+        svg:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                        aria-label="Slide 4"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img th:src="@{/images/p1.PNG}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img th:src="@{/images/p2.PNG}" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img th:src="@{/images/p3.PNG}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img th:src="@{/images/p4.PNG}" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="row" id="furama-logo">
+        <a href="https://furamavietnam.com/vi/" class="headertext"><img class="mob-standard-logo"
+                                                                        th:src="@{/images/logo.png}"
+                                                                        alt=" Logo Header Menu"></a>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row mt-4">
+        <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse px-5" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 px-5">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/employee" target="_self">Employee</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/customer" target="_self">Customer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/facility" target="_self">Facility</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contract" target="_self">Contract</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2 mt-4">
+            <div class="container-fluid">
+                <div class="row pb-3">
+                    <img th:src="@{/images/r1.PNG}" alt="">
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row pb-3">
+                    <img th:src="@{/images/r2.PNG}" alt="">
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row pb-3">
+                    <img th:src="@{/images/r3.PNG}" alt="">
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row pb-3">
+                    <img th:src="@{/images/r4.PNG}" alt="">
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row pb-3">
+                    <img th:src="@{/images/r5.PNG}" alt="">
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <img th:src="@{/images/r6.PNG}" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-10 mt-4">
+            <div class="container-fluid">
+                <div class="row">
+                    <caption><h2 align="center">Danh sách khách hàng</h2></caption>
+                    <div class="row text-primary" th:if="${message}">
+                        <h3 align="center" th:text="${message}"></h3>
+                    </div>
+                    <form class="row g-3" th:action="@{/customer/search}" method="get">
+                        <div class="col-auto">
+                            <input type="text" hidden name="action" value="search">
+                            <input type="text" class="form-control" name="keyword" placeholder="Search Anything">
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-3">Tìm kiếm</button>
+                        </div>
+                    </form>
+
+                    <table class="table table-striped table-bordered" id="tableCustomer" style="width:100%">
+                        <thead>
+                        <tr class="table-success">
+                            <th>No.</th>
+                            <th>Type</th>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Gender</th>
+                            <th>Identity</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="customer, i  : ${customerList}">
+
+                            <td th:text="${i.count}"></td>
+                            <td th:text="${customer.customerType == null ? '' : customer.customerType.getCustomerTypeName()}"></td>
+                            <td th:text="${customer.getName()}"></td>
+                            <td th:text="${customer.getBirthDay()}"></td>
+                            <td th:if="${customer.getGender() == 1}">Nam</td>
+                            <td th:if="${customer.getGender() == 0}">Nữ</td>
+                            <td th:if="${customer.getGender() == 2}">Khác</td>
+                            <td th:text="${customer.getIdCard()}"></td>
+                            <td th:text="${customer.getPhone()}"></td>
+                            <td th:text="${customer.getEmail()}"></td>
+                            <td th:text="${customer.getAddress()}"></td>
+                            <td>
+                                <a th:href="@{/customer/edit/{id} (id=${customer.getId()})}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-pencil" viewBox="0 0 16 16">
+                                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                    </svg>
+                                </a>
+                            </td>
+                            <td>
+                                <!-- Delete icon modal -->
+                                <svg data-bs-toggle="modal"
+                                     th:data-bs-target="'#deleteModal' + ${customer.getId()}"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     width="16" height="16" fill="currentColor"
+                                     class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                    <path fill-rule="evenodd"
+                                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                </svg>
+
+                                <!-- Delete Modal -->
+                                <div class="modal fade" th:id="deleteModal + ${customer.getId()}"
+                                     data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-danger ">
+                                                <h5 class="modal-title text-white">Cảnh báo</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Bạn muốn xóa khách hàng <span class="text-info"
+                                                                              th:text="${customer.getName()}"> ?</span>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-secondary"
+                                                        data-bs-dismiss="modal">Đóng
+                                                </button>
+                                                <a th:href="@{/customer/delete(id=${customer.getId()})}"
+                                                   class="btn btn-outline-danger">Xóa</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="display: flex; color: #0a58ca; justify-content: center">
+                    <a th:href="@{'/customer'(page=${customerList.number - 1})}" th:if="${customerList.hasPrevious()}">Previous
+                        &nbsp;</a>
+                    <label th:text="${customerList.number + 1}"></label>&nbsp; / &nbsp; <label
+                        th:text="${customerList.totalPages}"></label>
+                    <a th:href="@{'/customer'(page=${customerList.number + 1})}" th:if="${customerList.hasNext()}">&nbsp;
+                        Next</a>
+                </div>
+                <div class="row">
+                    <h2>
+                        <a th:href="@{/customer/create}">
+                            <button type="button" class="btn btn-primary">Thêm khách hàng mới</button>
+                        </a>
+                    </h2>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<hr>
+<div class="container-fluid">
+    <div class="row mt-4">
+        <div class="col-lg-12" style="text-align: center">
+            <div class="container-fluid">
+                <div class="row">
+                    <h4 style="font-size: 24px;color: #cbbe73;line-height: 36px;text-align: center;font-family:Playfair Display;font-weight:700;font-style:normal"
+                        class="vc_custom_heading">Liên hệ </h4>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <p style="font-family: Playfair Display">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        103 - 105 Vo Nguyen Giap Street, Khue My Ward, Ngu Hanh Son District, Danang City, Vietnam
+                    </p>
+                    <p style="font-family: Playfair Display">Tel.: 84-236-3847 333/888 * Fax: 84-236-3847 666</p>
+                    <p style="font-family: Playfair Display">Email: reservation@furamavietnam.com *
+                        www.furamavietnam.com</p>
+                    <p style="font-family: Playfair Display">GDS Codes: Amadeus-GD DADFUR,
+                        Galileo/Apollo-GD 16236, Sabre-GD 032771, Worldspan- GD DADFU</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/bootstrap_502/js/bootstrap.min.js}"></script>
+</body>
+</html>

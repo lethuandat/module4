@@ -272,10 +272,13 @@
                                                             <th>Vị trí:</th>
                                                             <td>
                                                                 <select class="form-select" name="position"
-                                                                        th:value="*{position}">
+                                                                        th:value="*{employee.position.positionName}">
+                                                                    <option value="">--Chọn vị trí--</option>
+
                                                                     <option th:each="item : ${positionList}"
                                                                             th:value="${item.positionId}"
                                                                             th:text="${item.positionName}"></option>
+
                                                                 </select>
                                                             </td>
                                                         </tr>
@@ -283,7 +286,8 @@
                                                             <th>Bằng cấp:</th>
                                                             <td>
                                                                 <select class="form-select" name="educationDegree"
-                                                                        th:value="*{educationDegree}">
+                                                                        th:value="*{employee.educationDegree}">
+                                                                    <option value="">--Chọn bằng cấp--</option>
                                                                     <option th:each="item : ${educationDegreeList}"
                                                                             th:value="${item.educationDegreeId}"
                                                                             th:text="${item.educationDegreeName}"></option>
@@ -294,7 +298,8 @@
                                                             <th>Phòng ban:</th>
                                                             <td>
                                                                 <select class="form-select"
-                                                                        th:value="*{division}" name="division">
+                                                                        th:value="*{employee.division}" name="division">
+                                                                    <option value="">--Chọn phòng ban--</option>
                                                                     <option th:each="item : ${divisionList}"
                                                                             th:value="${item.divisionId}"
                                                                             th:text="${item.divisionName}"></option>
@@ -305,7 +310,8 @@
                                                             <th>Username:</th>
                                                             <td>
                                                                 <select class="form-select"
-                                                                        th:value="*{username}" name="username">
+                                                                        th:value="*{employee.username}" name="username">
+                                                                    <option value="">--Chọn tài khoản--</option>
                                                                     <option th:each="item : ${userList}"
                                                                             th:value="${item.username}"
                                                                             th:text="${item.username}"></option>
@@ -432,6 +438,7 @@
                                                 <th>Vị trí:</th>
                                                 <td>
                                                     <select class="form-select" name="newPosition">
+                                                        <option value="" selected>--Chọn vị trí--</option>
                                                         <option th:each="item : ${positionList}"
                                                                 th:value="${item.positionId}"
                                                                 th:text="${item.positionName}"></option>
@@ -442,6 +449,7 @@
                                                 <th>Bằng cấp:</th>
                                                 <td>
                                                     <select class="form-select" name="newEducationDegree">
+                                                        <option value="" selected>--Chọn bằng cấp--</option>
                                                         <option th:each="item : ${educationDegreeList}"
                                                                 th:value="${item.educationDegreeId}"
                                                                 th:text="${item.educationDegreeName}"></option>
@@ -452,6 +460,7 @@
                                                 <th>Phòng ban:</th>
                                                 <td>
                                                     <select class="form-select" name="newDivision">
+                                                        <option value="" selected>--Chọn phòng ban--</option>
                                                         <option th:each="item : ${divisionList}"
                                                                 th:value="${item.divisionId}"
                                                                 th:text="${item.divisionName}"></option>
@@ -462,6 +471,7 @@
                                                 <th>Username:</th>
                                                 <td>
                                                     <select class="form-select" name="newUsername">
+                                                        <option value="" selected>--Chọn tài khoản--</option>
                                                         <option th:each="item : ${userList}"
                                                                 th:value="${item.username}"
                                                                 th:text="${item.username}"></option>
@@ -480,13 +490,6 @@
                             </form>
                         </div>
                     </div>
-                    <!--                        <a th:href="@{/employee/create}">-->
-<!--                            <button type="button" class="btn btn-primary">Thêm nhân viên mới</button>-->
-<!--                        </a>-->
-
-
-
-
                 </div>
             </div>
 
