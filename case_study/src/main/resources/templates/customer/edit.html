@@ -152,7 +152,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <h2 align="center">Edit Customer</h2>
-                    <form method="post" th:action="@{/customer/update}" th:object="${customer}">
+                    <form method="post" th:action="@{/customer/update}" th:object="${customerDto}">
                         <table class="table" cellpadding="5">
                             <tr>
                                 <th>ID:</th>
@@ -164,17 +164,21 @@
                                 <th>Customer Type:</th>
                                 <td>
                                     <select class="form-select" th:field="*{customerType.customerTypeId}">
+                                        <option value="">--Chọn loại khách</option>
                                         <option th:each="item : ${customerTypeList}" th:value="${item.customerTypeId}" th:text="${item.customerTypeName}"></option>
                                     </select>
                                 </td>
+                                <td><span class="text-danger" th:if="${#fields.hasErrors('customerType')}" th:errors="*{customerType}"></span></td>
                             </tr>
                             <tr>
                                 <th>Họ tên:</th>
                                 <td><input class="form-control" type="text" th:field="*{name}"></td>
+                                <td><span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></td>
                             </tr>
                             <tr>
                                 <th>Ngày sinh:</th>
                                 <td><input class="form-control" type="date" th:field="*{birthDay}"></td>
+                                <td><span class="text-danger" th:if="${#fields.hasErrors('birthDay')}" th:errors="*{birthDay}"></span></td>
                             </tr>
                             <tr>
                                 <th>Giới tính:</th>
@@ -183,29 +187,34 @@
                                     <input class="form-check-input" type="radio" th:field="*{gender}" value="1">Nam
                                     <input class="form-check-input" type="radio" th:field="*{gender}" value="2">Khác
                                 </td>
+                                <td><span class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span></td>
                             </tr>
                             <tr>
                                 <th>Số căn cước:</th>
                                 <td><input class="form-control" type="text" th:field="*{idCard}"></td>
+                                <td><span class="text-danger" th:if="${#fields.hasErrors('idCard')}" th:errors="*{idCard}"></span></td>
                             </tr>
                             <tr>
                                 <th>Số điện thoại:</th>
                                 <td><input class="form-control" type="text" th:field="*{phone}"></td>
+                                <td><span class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span></td>
                             </tr>
                             <tr>
                                 <th>Email:</th>
                                 <td><input class="form-control" type="text" th:field="*{email}"></td>
+                                <td><span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span></td>
                             </tr>
                             <tr>
                                 <th>Địa chỉ:</th>
                                 <td><input class="form-control" type="text" th:field="*{address}"></td>
+                                <td><span class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span></td>
                             </tr>
 
                             <tr>
                                 <td align="center">
                                     <a href="/customer">
                                         <button type="button" class="btn btn-outline-primary">
-                                            Quay lại danh sách khách hàng
+                                            Quay lại
                                         </button>
                                     </a>
                                 </td>

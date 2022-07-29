@@ -184,7 +184,6 @@
                             <th>Position</th>
                             <th>Education</th>
                             <th>Division</th>
-                            <th>User</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -197,14 +196,13 @@
                             <td th:text="${employee.birthDay}"></td>
 
                             <td th:text="${employee.idCard}"></td>
-                            <td th:text="${employee.salary}"></td>
+                            <td th:text="${#numbers.formatCurrency(employee.salary)}"></td>
                             <td th:text="${employee.phone}"></td>
                             <td th:text="${employee.email}"></td>
                             <td th:text="${employee.address}"></td>
                             <td th:text="${employee.position == null ? '' : employee.position.getPositionName()}"></td>
                             <td th:text="${employee.educationDegree == null ? '' : employee.educationDegree.getEducationDegreeName()}"></td>
                             <td th:text="${employee.division == null ? '' : employee.division.getDivisionName()}"></td>
-                            <td th:text="${employee.username == null ? '' : employee.username.getUsername()}"></td>
                             <td>
                                 <!-- Edit icon modal -->
                                 <a data-bs-toggle="modal" th:attr="data-bs-target='#editModal' + *{employee.id}">
@@ -221,8 +219,8 @@
                                     <div class="modal-dialog">
                                         <form th:action="@{/employee/update}" method="post">
                                             <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="editModalLabel">Cập nhật</h5>
+                                                <div class="modal-header bg-primary">
+                                                    <h5 class="modal-title text-white" id="editModalLabel">Cập nhật</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                 </div>
@@ -306,18 +304,6 @@
                                                                 </select>
                                                             </td>
                                                         </tr>
-                                                        <tr>
-                                                            <th>Username:</th>
-                                                            <td>
-                                                                <select class="form-select"
-                                                                        th:value="*{employee.username}" name="username">
-                                                                    <option value="">--Chọn tài khoản--</option>
-                                                                    <option th:each="item : ${userList}"
-                                                                            th:value="${item.username}"
-                                                                            th:text="${item.username}"></option>
-                                                                </select>
-                                                            </td>
-                                                        </tr>
                                                     </table>
                                                 </div>
                                                 <div class="modal-footer">
@@ -393,8 +379,8 @@
                         <div class="modal-dialog">
                             <form th:action="@{/employee/create}" method="post">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="createModalLabel">Thêm mới nhân viên </h5>
+                                    <div class="modal-header bg-secondary">
+                                        <h5 class="modal-title text-white" id="createModalLabel">Thêm mới nhân viên </h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                     </div>
@@ -464,17 +450,6 @@
                                                         <option th:each="item : ${divisionList}"
                                                                 th:value="${item.divisionId}"
                                                                 th:text="${item.divisionName}"></option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Username:</th>
-                                                <td>
-                                                    <select class="form-select" name="newUsername">
-                                                        <option value="" selected>--Chọn tài khoản--</option>
-                                                        <option th:each="item : ${userList}"
-                                                                th:value="${item.username}"
-                                                                th:text="${item.username}"></option>
                                                     </select>
                                                 </td>
                                             </tr>

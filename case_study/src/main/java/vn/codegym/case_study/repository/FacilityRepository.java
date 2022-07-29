@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import vn.codegym.case_study.model.Facility;
 
 public interface FacilityRepository extends JpaRepository<Facility, Integer> {
-    Page<Facility> findAllByNameContainsOrAreaContainsOrCostContains(String name, String area, String cost, Pageable pageable);
+    Page<Facility> findAllByNameContainsOrOtherDescriptionContainsOrFacilityFreeContains(String name, String description, String free, Pageable pageable);
 }

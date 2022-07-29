@@ -58,6 +58,11 @@ public class EmployeeController {
         List<Position> positionList = positionService.findAll();
         List<EducationDegree> educationDegreeList = educationDegreeService.findAll();
 
+        if (employeeList.isEmpty()) {
+            model.addAttribute("message", "Không tìm thấy kết quả phù hợp!");
+            return "employee/list";
+        }
+
         model.addAttribute("employeeList", employeeList);
         model.addAttribute("divisionList", divisionList);
         model.addAttribute("positionList", positionList);
@@ -67,14 +72,14 @@ public class EmployeeController {
     }
 
     @PostMapping("/create")
-    public String create(@RequestParam("newName") String name, @RequestParam("newBirthDay") String birthDay, @RequestParam("newIdentity") String idCard, @RequestParam("newSalary") Double salary, @RequestParam("newPhone") String phone, @RequestParam("newEmail") String email, @RequestParam("newAddress") String address, @RequestParam("newPosition") Position position, @RequestParam("newEducationDegree") EducationDegree educationDegree, @RequestParam("newDivision") Division division, @RequestParam("newUsername") User username, RedirectAttributes redirectAttributes) {
-        employeeService.save(new Employee(name, birthDay, idCard, salary, phone, email, address, position, educationDegree, division, username));
+    public String create(@RequestParam("newName") String name, @RequestParam("newBirthDay") String birthDay, @RequestParam("newIdentity") String idCard, @RequestParam("newSalary") Double salary, @RequestParam("newPhone") String phone, @RequestParam("newEmail") String email, @RequestParam("newAddress") String address, @RequestParam("newPosition") Position position, @RequestParam("newEducationDegree") EducationDegree educationDegree, @RequestParam("newDivision") Division division, RedirectAttributes redirectAttributes) {
+        employeeService.save(new Employee(name, birthDay, idCard, salary, phone, email, address, position, educationDegree, division, null));
         redirectAttributes.addFlashAttribute("message", "Thêm mới thành công!");
         return "redirect:/employee";
     }
 
     @PostMapping("/update")
-    public String update(@RequestParam("id") Integer id, @RequestParam("name") String name, @RequestParam("birthDay") String birthDay, @RequestParam("idCard") String idCard, @RequestParam("salary") Double salary, @RequestParam("phone") String phone, @RequestParam("email") String email, @RequestParam("address") String address, @RequestParam("position") Position position, @RequestParam("educationDegree") EducationDegree educationDegree, @RequestParam("division") Division division, @RequestParam("username") User username, RedirectAttributes redirectAttributes) {
+    public String update(@RequestParam("id") Integer id, @RequestParam("name") String name, @RequestParam("birthDay") String birthDay, @RequestParam("idCard") String idCard, @RequestParam("salary") Double salary, @RequestParam("phone") String phone, @RequestParam("email") String email, @RequestParam("address") String address, @RequestParam("position") Position position, @RequestParam("educationDegree") EducationDegree educationDegree, @RequestParam("division") Division division, RedirectAttributes redirectAttributes) {
         Employee employee = employeeService.findById(id);
         employee.setName(name);
         employee.setBirthDay(birthDay);
@@ -86,7 +91,6 @@ public class EmployeeController {
         employee.setPosition(position);
         employee.setEducationDegree(educationDegree);
         employee.setDivision(division);
-        employee.setUsername(username);
         employeeService.save(employee);
         redirectAttributes.addFlashAttribute("message", "Cập nhật thành công!");
         return "redirect:/employee";

@@ -37,6 +37,6 @@ public class FacilityServiceImpl implements FacilityService {
 
     @Override
     public Page<Facility> search(String keyword, Pageable pageable) {
-        return facilityRepository.findAllByNameContainsOrAreaContainsOrCostContains(keyword, keyword, keyword, pageable);
+        return facilityRepository.findAllByNameContainsOrOtherDescriptionContainsOrFacilityFreeContains(keyword, keyword, keyword, pageable);
     }
 }

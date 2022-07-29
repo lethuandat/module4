@@ -48,6 +48,11 @@ public class FacilityController {
         List<RentType> rentTypeList = rentTypeService.findAll();
         List<FacilityType> facilityTypeList = facilityTypeService.findAll();
 
+        if (facilityList.isEmpty()) {
+            model.addAttribute("message", "Không tìm thấy kết quả phù hợp!");
+            return "facility/list";
+        }
+
         model.addAttribute("facilityList", facilityList);
         model.addAttribute("rentTypeList", rentTypeList);
         model.addAttribute("facilityTypeList", facilityTypeList);

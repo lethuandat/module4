@@ -155,11 +155,11 @@
         <div class="col-lg-10 mt-4">
             <div class="container-fluid">
                 <div class="row">
-                    <caption><h2 align="center">Danh sách khách hàng</h2></caption>
+                    <caption><h2 align="center">Danh sách dịch vụ</h2></caption>
                     <div class="row text-primary" th:if="${message}">
                         <h3 align="center" th:text="${message}"></h3>
                     </div>
-                    <form class="row g-3" th:action="@{/customer/search}" method="get">
+                    <form class="row g-3" th:action="@{/facility/search}" method="get">
                         <div class="col-auto">
                             <input type="text" hidden name="action" value="search">
                             <input type="text" class="form-control" name="keyword" placeholder="Search Anything">
@@ -173,34 +173,39 @@
                         <thead>
                         <tr class="table-success">
                             <th>No.</th>
-                            <th>Type</th>
                             <th>Name</th>
-                            <th>Date</th>
-                            <th>Gender</th>
-                            <th>Identity</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Address</th>
+                            <th>Area</th>
+                            <th>Cost</th>
+                            <th>Max people</th>
+                            <th>Rent type</th>
+                            <th>Facility type</th>
+                            <th>Standard room</th>
+                            <th>Description</th>
+                            <th>Pool</th>
+                            <th>Floor</th>
+                            <th>Facility Free</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="customer, i  : ${customerList}">
+                        <tr th:each="facility, i  : ${facilityList}">
 
                             <td th:text="${i.count}"></td>
-                            <td th:text="${customer.customerType == null ? '' : customer.customerType.getCustomerTypeName()}"></td>
-                            <td th:text="${customer.getName()}"></td>
-                            <td th:text="${customer.getBirthDay()}"></td>
-                            <td th:if="${customer.getGender() == 1}">Nam</td>
-                            <td th:if="${customer.getGender() == 0}">Nữ</td>
-                            <td th:if="${customer.getGender() == 2}">Khác</td>
-                            <td th:text="${customer.getIdCard()}"></td>
-                            <td th:text="${customer.getPhone()}"></td>
-                            <td th:text="${customer.getEmail()}"></td>
-                            <td th:text="${customer.getAddress()}"></td>
+                            <td th:text="${facility.name}"></td>
+                            <td th:text="${facility.area}"></td>
+                            <td th:text="${#numbers.formatCurrency(facility.cost)}"></td>
+                            <td th:text="${facility.maxPeople}"></td>
+                            <td th:text="${facility.rentType == null ? '' : facility.rentType.getRentTypeName()}"></td>
+                            <td th:text="${facility.facilityType == null ? '' : facility.facilityType.getFacilityTypeName()}"></td>
+                            <td th:text="${facility.standardRoom == null ? 'N/A' : facility.standardRoom}"></td>
+                            <td th:text="${facility.otherDescription == '' ? 'N/A' : facility.otherDescription}"></td>
+                            <td th:text="${facility.poolArea == null ? 'N/A' : facility.poolArea}"></td>
+                            <td th:text="${facility.numberFloor == null ? 'N/A' : facility.numberFloor}"></td>
+                            <td th:text="${facility.facilityFree == '' ? 'N/A' : facility.facilityFree}"></td>
+
                             <td>
-                                <a th:href="@{/customer/edit/{id} (id=${customer.getId()})}">
+                                <a th:href="@{/facility/edit/{id} (id=${facility.getId()})}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                          class="bi bi-pencil" viewBox="0 0 16 16">
                                         <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
@@ -210,7 +215,7 @@
                             <td>
                                 <!-- Delete icon modal -->
                                 <svg data-bs-toggle="modal"
-                                     th:data-bs-target="'#deleteModal' + ${customer.getId()}"
+                                     th:data-bs-target="'#deleteModal' + ${facility.getId()}"
                                      xmlns="http://www.w3.org/2000/svg"
                                      width="16" height="16" fill="currentColor"
                                      class="bi bi-trash" viewBox="0 0 16 16">
@@ -220,7 +225,7 @@
                                 </svg>
 
                                 <!-- Delete Modal -->
-                                <div class="modal fade" th:id="deleteModal + ${customer.getId()}"
+                                <div class="modal fade" th:id="deleteModal + ${facility.getId()}"
                                      data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                                      aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -231,14 +236,14 @@
                                                         aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                Bạn muốn xóa khách hàng <span class="text-info"
-                                                                              th:text="${customer.getName()}"> ?</span>
+                                                Bạn muốn xóa dịch vụ <span class="text-info"
+                                                                              th:text="${facility.getName()}"> ?</span>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-outline-secondary"
                                                         data-bs-dismiss="modal">Đóng
                                                 </button>
-                                                <a th:href="@{/customer/delete(id=${customer.getId()})}"
+                                                <a th:href="@{/facility/delete(id=${facility.getId()})}"
                                                    class="btn btn-outline-danger">Xóa</a>
                                             </div>
                                         </div>
@@ -251,17 +256,17 @@
                 </div>
 
                 <div style="display: flex; color: #0a58ca; justify-content: center">
-                    <a th:href="@{'/customer'(page=${customerList.number - 1})}" th:if="${customerList.hasPrevious()}">Previous
+                    <a th:href="@{'/facility'(page=${facilityList.number - 1})}" th:if="${facilityList.hasPrevious()}">Previous
                         &nbsp;</a>
-                    <label th:text="${customerList.number + 1}"></label>&nbsp; / &nbsp; <label
-                        th:text="${customerList.totalPages}"></label>
-                    <a th:href="@{'/customer'(page=${customerList.number + 1})}" th:if="${customerList.hasNext()}">&nbsp;
+                    <label th:text="${facilityList.number + 1}"></label>&nbsp; / &nbsp; <label
+                        th:text="${facilityList.totalPages}"></label>
+                    <a th:href="@{'/facility'(page=${facilityList.number + 1})}" th:if="${facilityList.hasNext()}">&nbsp;
                         Next</a>
                 </div>
                 <div class="row">
                     <h2>
-                        <a th:href="@{/customer/create}">
-                            <button type="button" class="btn btn-primary">Thêm khách hàng mới</button>
+                        <a th:href="@{/facility/create}">
+                            <button type="button" class="btn btn-primary">Thêm dịch vụ</button>
                         </a>
                     </h2>
                 </div>

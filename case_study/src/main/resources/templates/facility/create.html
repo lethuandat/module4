@@ -151,61 +151,99 @@
         <div class="col-lg-10 mt-4">
             <div class="container-fluid">
                 <div class="row">
-                    <h2 align="center">Thêm mới khách hàng</h2>
-                    <form th:action="@{/customer/create}" method="post" th:object="${customer}">
+                    <h2 align="center">Thêm mới dịch vụ</h2>
+                    <form th:action="@{/facility/create}" method="post" th:object="${facility}">
+
                         <table class="table" cellpadding="5">
                             <tr>
-                                <th>Loại khách:</th>
+                                <th>Facility type:</th>
                                 <td>
-                                    <select class="form-select" th:field="*{customerType.customerTypeId}">
-                                        <option th:each="item : ${customerTypeList}" th:value="${item.customerTypeId}" th:text="${item.customerTypeName}"></option>
+                                    <select class="form-select" th:field="*{facilityType.facilityTypeId}" id="facilityTypeId" onchange="displayBonus(this)">
+                                        <option value="">--Chọn loại dịch vụ--</option>
+                                        <option th:each="item : ${facilityTypeList}" th:value="${item.facilityTypeId}" th:text="${item.facilityTypeName}"></option>
                                     </select>
                                 </td>
                             </tr>
+
                             <tr>
-                                <th>Họ tên:</th>
-                                <td><input class="form-control" type="text" th:field="*{name}"></td>
-                            </tr>
-                            <tr>
-                                <th>Ngày sinh:</th>
-                                <td><input class="form-control" type="date" th:field="*{birthDay}"></td>
-                            </tr>
-                            <tr>
-                                <th>Giới tính:</th>
+                                <th>Name:</th>
                                 <td>
-                                    <input class="form-check-input" type="radio" th:field="*{gender}" value="0">Nữ
-                                    <input class="form-check-input" type="radio" th:field="*{gender}" value="1">Nam
-                                    <input class="form-check-input" type="radio" th:field="*{gender}" value="2">Khác
+                                    <input class="form-control" type="text" th:field="*{name}" id="name" size="45"/>
                                 </td>
                             </tr>
                             <tr>
-                                <th>Số căn cước:</th>
-                                <td><input class="form-control" type="text" th:field="*{idCard}"></td>
+                                <th>Area:</th>
+                                <td>
+                                    <input class="form-control" type="text" th:field="*{area}" id="area" size="45"/>
+                                </td>
                             </tr>
                             <tr>
-                                <th>Số điện thoại:</th>
-                                <td><input class="form-control" type="text" th:field="*{phone}"></td>
+                                <th>Cost:</th>
+                                <td>
+                                    <input type="text" class="form-control" th:field="*{cost}" id="cost" size="45"/>
+                                </td>
                             </tr>
                             <tr>
-                                <th>Email:</th>
-                                <td><input class="form-control" type="text" th:field="*{email}"></td>
+                                <th>Max people:</th>
+                                <td>
+                                    <input type="text" class="form-control" th:field="*{maxPeople}" id="maxPeople" size="45"/>
+                                </td>
                             </tr>
                             <tr>
-                                <th>Địa chỉ:</th>
-                                <td><input class="form-control" type="text" th:field="*{address}"></td>
+                                <th>Rent type:</th>
+                                <td>
+                                    <select class="form-select" th:field="*{rentType.RentTypeId}">
+                                        <option value="">--Chọn kiểu thuê--</option>
+                                        <option th:each="item : ${rentTypeList}" th:value="${item.RentTypeId}" th:text="${item.RentTypeName}"></option>
+                                    </select>
+                                </td>
                             </tr>
 
+                            <tr hidden id="standardRoom">
+                                <th>Standard Room:</th>
+                                <td>
+                                    <input class="form-check-input" type="radio" th:field="*{standardRoom}" value="VIP"> VIP
+                                    <input class="form-check-input" type="radio" th:field="*{standardRoom}" value="Professional"> Professional
+                                    <input class="form-check-input" type="radio" th:field="*{standardRoom}" value="Standard"> Standard
+                                    <input class="form-check-input" type="radio" th:field="*{standardRoom}" value="Normal"> Normal
+
+                                </td>
+                            </tr>
+                            <tr hidden id="otherDescription">
+                                <th>Other Description:</th>
+                                <td>
+                                    <input class="form-control" type="text" th:field="*{otherDescription}" size="45"/>
+                                </td>
+                            </tr>
+                            <tr hidden id="poolArea">
+                                <th>Pool Area:</th>
+                                <td>
+                                    <input class="form-control" type="text" th:field="*{poolArea}" size="45"/>
+                                </td>
+                            </tr>
+                            <tr hidden id="numberFloor">
+                                <th>Number of Floors:</th>
+                                <td>
+                                    <input class="form-control" type="text" th:field="*{numberFloor}" size="45"/>
+                                </td>
+                            </tr>
+                            <tr hidden id="facilityFree">
+                                <th>Facility Free:</th>
+                                <td>
+                                    <input class="form-control" type="text" th:field="*{facilityFree}" size="45"/>
+                                </td>
+                            </tr>
                             <tr>
                                 <td align="center">
-                                    <a href="/customer">
-                                        <button type="button" class="btn btn-outline-primary">
-                                            Quay lại danh sách khách hàng
+                                    <a href="/facility">
+                                        <button type="button" class="btn btn-primary">
+                                            Back
                                         </button>
                                     </a>
                                 </td>
                                 <td align="left">
-                                    <button type="submit" class="btn btn-outline-primary">
-                                        Tạo mới
+                                    <button type="submit" class="btn btn-primary">
+                                        Save
                                     </button>
                                 </td>
                             </tr>
@@ -251,6 +289,36 @@
         </div>
     </div>
 </div>
+
+<script>
+    function displayBonus(facilityTypeId) {
+        if (facilityTypeId.value == 1) {
+            document.getElementById("standardRoom").hidden = false;
+            document.getElementById("otherDescription").hidden = false;
+            document.getElementById("poolArea").hidden = false;
+            document.getElementById("numberFloor").hidden = false;
+            document.getElementById("facilityFree").hidden = true;
+        } else if (facilityTypeId.value == 2) {
+            document.getElementById("standardRoom").hidden = false;
+            document.getElementById("otherDescription").hidden = false;
+            document.getElementById("poolArea").hidden = true;
+            document.getElementById("numberFloor").hidden = false;
+            document.getElementById("facilityFree").hidden = true;
+        } else if (facilityTypeId.value == 3) {
+            document.getElementById("standardRoom").hidden = true;
+            document.getElementById("otherDescription").hidden = true;
+            document.getElementById("poolArea").hidden = true;
+            document.getElementById("numberFloor").hidden = true;
+            document.getElementById("facilityFree").hidden = false;
+        } else {
+            document.getElementById("standardRoom").hidden = true;
+            document.getElementById("otherDescription").hidden = true;
+            document.getElementById("poolArea").hidden = true;
+            document.getElementById("numberFloor").hidden = true;
+            document.getElementById("facilityFree").hidden = true;
+        }
+    }
+</script>
 
 <script th:src=@{"/bootstrap_502/css/bootstrap.js"}></script>
 </body>
