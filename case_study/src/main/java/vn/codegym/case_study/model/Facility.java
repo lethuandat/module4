@@ -1,5 +1,7 @@
 package vn.codegym.case_study.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -28,6 +30,7 @@ public class Facility {
     private String facilityFree;
 
     @OneToMany(mappedBy = "facility")
+    @JsonBackReference
     private Set<Contract> contract;
 
     public Facility() {

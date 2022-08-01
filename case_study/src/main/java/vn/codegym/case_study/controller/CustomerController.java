@@ -20,7 +20,7 @@ import vn.codegym.case_study.service.CustomerTypeService;
 import java.util.List;
 
 @Controller
-@RequestMapping("customer")
+@RequestMapping("/customer")
 public class CustomerController {
     @Autowired
     CustomerService customerService;

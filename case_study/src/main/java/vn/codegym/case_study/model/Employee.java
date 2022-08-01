@@ -1,5 +1,7 @@
 package vn.codegym.case_study.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -9,6 +11,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+
     private String birthDay;
     private String idCard;
     private Double salary;
@@ -33,6 +36,7 @@ public class Employee {
     private User username;
 
     @OneToMany(mappedBy = "employee")
+    @JsonBackReference
     private Set<Contract> contract;
     public Employee() {
     }
