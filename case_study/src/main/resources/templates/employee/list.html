@@ -271,7 +271,7 @@
                                                             <th>Vị trí:</th>
                                                             <td>
                                                                 <select class="form-select" name="position"
-                                                                        th:value="*{employee.position.positionName}">
+                                                                        th:value="${employee.position.getPositionId()}">
                                                                     <option value="">--Chọn vị trí--</option>
 
                                                                     <option th:each="item : ${positionList}"
@@ -285,7 +285,7 @@
                                                             <th>Bằng cấp:</th>
                                                             <td>
                                                                 <select class="form-select" name="educationDegree"
-                                                                        th:value="*{employee.educationDegree}">
+                                                                        th:value="${employee.educationDegree.educationDegreeName}">
                                                                     <option value="">--Chọn bằng cấp--</option>
                                                                     <option th:each="item : ${educationDegreeList}"
                                                                             th:value="${item.educationDegreeId}"
@@ -297,7 +297,7 @@
                                                             <th>Phòng ban:</th>
                                                             <td>
                                                                 <select class="form-select"
-                                                                        th:value="*{employee.division}" name="division">
+                                                                        th:value="${employee.division.divisionName}" name="division">
                                                                     <option value="">--Chọn phòng ban--</option>
                                                                     <option th:each="item : ${divisionList}"
                                                                             th:value="${item.divisionId}"
@@ -461,7 +461,7 @@
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                             Đóng
                                         </button>
-                                        <button type="submit" class="btn btn-primary">Lưu</button>
+                                        <button type="submit" id="addBtn" class="btn btn-primary">Lưu</button>
                                     </div>
                                 </div>
                             </form>

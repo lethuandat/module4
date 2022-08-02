@@ -23,7 +23,6 @@ public class EmployeeDto {
     @Pattern(message = "*Không đúng định dạng (XXXXXXXXX với X là số từ 0 - 9)", regexp = "\\d{9}")
     private String idCard;
 
-
     @NotEmpty(message = "*Không được để trống!")
     @Min(value = 1, message = "*Phải nhập số > 0")
     private Double salary;

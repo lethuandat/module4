@@ -30,8 +30,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
        http.csrf().disable().
                formLogin().
                defaultSuccessUrl("/blog").permitAll().
-                and().
-               authorizeHttpRequests().anyRequest().authenticated();
+               and().authorizeRequests().
+               antMatchers("/blog").hasRole("USER").
+               antMatchers("/blog/**").hasAnyRole("ADMIN").
+               anyRequest().authenticated();
     }
 
 }

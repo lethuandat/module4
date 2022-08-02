@@ -1,5 +1,7 @@
 package vn.codegym.case_study.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -9,6 +11,7 @@ public class User {
     private String username;
     private String password;
     @OneToOne(mappedBy = "username")
+    @JsonBackReference
     private Employee employee;
 
     public User() {

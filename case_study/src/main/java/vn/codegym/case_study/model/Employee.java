@@ -11,7 +11,6 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-
     private String birthDay;
     private String idCard;
     private Double salary;
