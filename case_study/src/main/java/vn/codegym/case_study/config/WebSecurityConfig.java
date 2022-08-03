@@ -1,4 +1,4 @@
-package vn.codegym.blog.config;
+package vn.codegym.case_study.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -8,13 +8,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import vn.codegym.blog.service.impl.MyUserDetailService;
+import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import vn.codegym.case_study.service.impl.MyUserDetailServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private MyUserDetailService myUserDetailService;
+    private MyUserDetailServiceImpl myUserDetailService;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -30,11 +32,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().
                 formLogin().
-                defaultSuccessUrl("/blog").permitAll().
-                and().authorizeRequests().
-                antMatchers("/blog").hasRole("USER").
-                antMatchers("/blog/**").hasAnyRole("ADMIN").
-                anyRequest().authenticated();
+                loginPage("/myLogin").
+                defaultSuccessUrl("/home").permitAll()
+                .and()
+                .authorizeRequests().
+                antMatchers("/**").hasRole("ADMIN").
+                antMatchers( "/home", "/employee").hasRole("USER").
+                anyRequest().authenticated().
+                and().
+                exceptionHandling().accessDeniedPage("/access-denied");
+
+        http.authorizeRequests().and().rememberMe().tokenRepository(persistentTokenRepository()).tokenValiditySeconds(24 * 60 * 60);
+
     }
 
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        InMemoryTokenRepositoryImpl inMemoryTokenRepository = new InMemoryTokenRepositoryImpl();
+        return inMemoryTokenRepository;
+    }
 }

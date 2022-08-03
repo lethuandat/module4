@@ -12,15 +12,14 @@ public class FacilityDto {
     @Pattern(message = "*Không đúng định dạng (VD: Lê Văn An)", regexp = "^([A-Z\\p{L}]{1}[a-z\\p{L}]*)+(\\s([A-Z\\p{L}]{1}[a-z\\p{L}]*))*$")
     private String name;
 
-    @NotEmpty(message = "*Không được để trống!")
+
     @Min(value = 1, message = "*Phải nhập số > 0")
     private Integer area;
 
-    @NotEmpty(message = "*Không được để trống!")
+
     @Min(value = 1, message = "*Phải nhập số > 0")
     private Double cost;
 
-    @NotEmpty(message = "*Không được để trống!")
     @Min(value = 1, message = "*Phải nhập số > 0")
     private Integer maxPeople;
 
@@ -36,11 +35,11 @@ public class FacilityDto {
     @NotBlank(message = "*Không được để trống!")
     private String otherDescription;
 
-    @NotEmpty(message = "*Không được để trống!")
+
     @Min(value = 1, message = "*Phải nhập số > 0")
     private Double poolArea;
 
-    @NotEmpty(message = "*Không được để trống!")
+
     @Min(value = 1, message = "*Phải nhập số > 0")
     private Integer numberFloor;
 

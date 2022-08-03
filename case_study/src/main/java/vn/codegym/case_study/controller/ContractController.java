@@ -9,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.codegym.case_study.dto.ContractDto;
 import vn.codegym.case_study.model.*;
@@ -39,19 +42,22 @@ public class ContractController {
     EmployeeService employeeService;
 
     @GetMapping
-    public String showPage(@PageableDefault(value = 5) Pageable pageable, Model model) {
+    public String showPage(@PageableDefault(value =1005) Pageable pageable, Model model) {
         Page<Contract> contractList = contractService.findAll(pageable);
         Page<Facility> facilityList = facilityService.findAll(pageable);
         Page<Customer> customerList = customerService.findAll(pageable);
         List<ContractDetail> contractDetailList = contractDetailService.findAll();
         List<AttachFacility> attachFacilityList = attachFacilityService.findAll();
+        List<Double> totalMoneyList = contractService.getTotalMoney();
 
         model.addAttribute("contractList", contractList);
         model.addAttribute("facilityList", facilityList);
         model.addAttribute("customerList", customerList);
         model.addAttribute("contractDetailList", contractDetailList);
         model.addAttribute("attachFacilityList", attachFacilityList);
+        model.addAttribute("totalMoneyList", totalMoneyList);
 
+        System.out.println(totalMoneyList);
         return "contract/list";
     }
 
@@ -68,6 +74,7 @@ public class ContractController {
         model.addAttribute("attachFacilityList", attachFacilityList);
 
         model.addAttribute("contractDto", new ContractDto());
+
         return "/contract/create";
     }
 

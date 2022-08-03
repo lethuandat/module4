@@ -28,7 +28,7 @@ public class CustomerDto {
     private String idCard;
 
     @NotBlank(message = "*Không được để trống!")
-    @Pattern(message = "*Không đúng định dạng (090XXXXXXX hoặc 091XXXXXXX với X là số từ 0 - 9)",regexp = "^090|091\\d{7}$")
+    @Pattern(message = "*Không đúng định dạng (090XXXXXXX hoặc 091XXXXXXX hoặc (84)+90XXXXXXX hoặc (84)+91XXXXXXX, với X là số từ 0 - 9)", regexp = "^090|091|(84)\\+90|(84)\\+91\\d{7}$")
     private String phone;
 
     @NotBlank(message = "*Không được để trống!")

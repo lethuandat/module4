@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
@@ -98,10 +98,13 @@
                             <a class="nav-link" href="/contract" target="_self">Contract</a>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    <div sec:authorize="isAuthenticated()">
+                        <span sec:authentication="principal.username"> | </span>
+                        <a href="/logout">Đăng xuất</a>
+                    </div>
+                    <div sec:authorize="isAnonymous()">
+                        <a href="/login"><button class="btn btn-outline-success" type="button">Đăng nhập</button></a>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -152,7 +155,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <h2 align="center">Edit Customer</h2>
-                    <form method="post" th:action="@{/facility/update}" th:object="${facility}">
+                    <form method="post" th:action="@{/facility/update}" th:object="${facilityDto}">
                         <table class="table" cellpadding="5">
                             <tr>
                                 <th>ID:</th>

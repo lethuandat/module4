@@ -15,7 +15,6 @@ public class ContractDto {
     @NotBlank(message = "*Không được để trống!")
     private String endDate;
 
-
     @Min(value = 0, message = "*Phải nhập số >= 0")
     private Double deposit;
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
@@ -98,10 +98,13 @@
                             <a class="nav-link" href="/contract" target="_self">Contract</a>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    <div sec:authorize="isAuthenticated()">
+                        <span sec:authentication="principal.username"> | </span>
+                        <a href="/logout">Đăng xuất</a>
+                    </div>
+                    <div sec:authorize="isAnonymous()">
+                        <a href="/login"><button class="btn btn-outline-success" type="button">Đăng nhập</button></a>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -152,7 +155,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <h2 align="center">Thêm mới dịch vụ</h2>
-                    <form th:action="@{/facility/create}" method="post" th:object="${facility}">
+                    <form th:action="@{/facility/create}" method="post" th:object="${facilityDto}">
 
                         <table class="table" cellpadding="5">
                             <tr>
@@ -162,6 +165,7 @@
                                         <option value="">--Chọn loại dịch vụ--</option>
                                         <option th:each="item : ${facilityTypeList}" th:value="${item.facilityTypeId}" th:text="${item.facilityTypeName}"></option>
                                     </select>
+                                    <span class="text-danger" th:if="${#fields.hasErrors('facilityType')}" th:errors="*{facilityType}"></span>
                                 </td>
                             </tr>
 
@@ -169,24 +173,28 @@
                                 <th>Name:</th>
                                 <td>
                                     <input class="form-control" type="text" th:field="*{name}" id="name" size="45"/>
+                                    <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>Area:</th>
                                 <td>
                                     <input class="form-control" type="text" th:field="*{area}" id="area" size="45"/>
+                                    <span class="text-danger" th:if="${#fields.hasErrors('area')}" th:errors="*{area}"></span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>Cost:</th>
                                 <td>
                                     <input type="text" class="form-control" th:field="*{cost}" id="cost" size="45"/>
+                                    <span class="text-danger" th:if="${#fields.hasErrors('cost')}" th:errors="*{cost}"></span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>Max people:</th>
                                 <td>
                                     <input type="text" class="form-control" th:field="*{maxPeople}" id="maxPeople" size="45"/>
+                                    <span class="text-danger" th:if="${#fields.hasErrors('maxPeople')}" th:errors="*{maxPeople}"></span>
                                 </td>
                             </tr>
                             <tr>
@@ -196,6 +204,7 @@
                                         <option value="">--Chọn kiểu thuê--</option>
                                         <option th:each="item : ${rentTypeList}" th:value="${item.RentTypeId}" th:text="${item.RentTypeName}"></option>
                                     </select>
+                                    <span class="text-danger" th:if="${#fields.hasErrors('rentType')}" th:errors="*{rentType}"></span>
                                 </td>
                             </tr>
 
@@ -206,31 +215,35 @@
                                     <input class="form-check-input" type="radio" th:field="*{standardRoom}" value="Professional"> Professional
                                     <input class="form-check-input" type="radio" th:field="*{standardRoom}" value="Standard"> Standard
                                     <input class="form-check-input" type="radio" th:field="*{standardRoom}" value="Normal"> Normal
-
+                                    <span class="text-danger" th:if="${#fields.hasErrors('standardRoom')}" th:errors="*{standardRoom}"></span>
                                 </td>
                             </tr>
                             <tr hidden id="otherDescription">
                                 <th>Other Description:</th>
                                 <td>
                                     <input class="form-control" type="text" th:field="*{otherDescription}" size="45"/>
+                                    <span class="text-danger" th:if="${#fields.hasErrors('otherDescription')}" th:errors="*{otherDescription}"></span>
                                 </td>
                             </tr>
                             <tr hidden id="poolArea">
                                 <th>Pool Area:</th>
                                 <td>
                                     <input class="form-control" type="text" th:field="*{poolArea}" size="45"/>
+                                    <span class="text-danger" th:if="${#fields.hasErrors('poolArea')}" th:errors="*{poolArea}"></span>
                                 </td>
                             </tr>
                             <tr hidden id="numberFloor">
                                 <th>Number of Floors:</th>
                                 <td>
                                     <input class="form-control" type="text" th:field="*{numberFloor}" size="45"/>
+                                    <span class="text-danger" th:if="${#fields.hasErrors('numberFloor')}" th:errors="*{numberFloor}"></span>
                                 </td>
                             </tr>
                             <tr hidden id="facilityFree">
                                 <th>Facility Free:</th>
                                 <td>
                                     <input class="form-control" type="text" th:field="*{facilityFree}" size="45"/>
+                                    <span class="text-danger" th:if="${#fields.hasErrors('facilityFree')}" th:errors="*{facilityFree}"></span>
                                 </td>
                             </tr>
                             <tr>
