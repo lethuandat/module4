@@ -44,6 +44,11 @@ public class Customer {
     public Customer() {
     }
 
+
+    public Customer(Integer id) {
+        this.id = id;
+    }
+
     public Customer(Integer id, CustomerType customerType, String name, String birthDay, Integer gender, String idCard, String phone, String email, String address, Set<Contract> contract) {
         this.id = id;
         this.customerType = customerType;

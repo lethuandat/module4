@@ -1,17 +1,14 @@
 package vn.codegym.case_study.dto;
 
-import vn.codegym.case_study.model.CustomerType;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class CustomerDto {
     private Integer id;
 
-    @NotNull(message = "*Không được để trống!")
-    private CustomerType customerType;
+    @NotBlank(message = "*Không được để trống!")
+    private String customerType;
 
     @NotBlank(message = "*Không được để trống!")
     @Pattern(message = "*Không đúng định dạng (VD: Lê Văn An)", regexp = "^([A-Z\\p{L}]{1}[a-z\\p{L}]*)+(\\s([A-Z\\p{L}]{1}[a-z\\p{L}]*))*$")
@@ -20,15 +17,15 @@ public class CustomerDto {
     @NotBlank(message = "*Không được để trống!")
     private String birthDay;
 
-    @NotNull(message = "*Không được để trống!")
-    private Integer gender;
+    @NotBlank(message = "*Không được để trống!")
+    private String gender;
 
     @NotBlank(message = "*Không được để trống!")
     @Pattern(message = "*Không đúng định dạng (XXXXXXXXX với X là số từ 0 - 9)", regexp = "\\d{9}")
     private String idCard;
 
     @NotBlank(message = "*Không được để trống!")
-    @Pattern(message = "*Không đúng định dạng (090XXXXXXX hoặc 091XXXXXXX hoặc (84)+90XXXXXXX hoặc (84)+91XXXXXXX, với X là số từ 0 - 9)", regexp = "^090|091|(84)\\+90|(84)\\+91\\d{7}$")
+    @Pattern(message = "*Không đúng định dạng (090XXXXXXX hoặc 091XXXXXXX hoặc (84)+90XXXXXXX hoặc (84)+91XXXXXXX, với X là số từ 0 - 9)", regexp = "^(090|091|(84)\\+90|(84)\\+91)\\d{7}$")
     private String phone;
 
     @NotBlank(message = "*Không được để trống!")
@@ -41,7 +38,7 @@ public class CustomerDto {
     public CustomerDto() {
     }
 
-    public CustomerDto(Integer id, CustomerType customerType, String name, String birthDay, Integer gender, String idCard, String phone, String email, String address) {
+    public CustomerDto(Integer id, String customerType, String name, String birthDay, String gender, String idCard, String phone, String email, String address) {
         this.id = id;
         this.customerType = customerType;
         this.name = name;
@@ -61,11 +58,11 @@ public class CustomerDto {
         this.id = id;
     }
 
-    public CustomerType getCustomerType() {
+    public String getCustomerType() {
         return customerType;
     }
 
-    public void setCustomerType(CustomerType customerType) {
+    public void setCustomerType(String customerType) {
         this.customerType = customerType;
     }
 
@@ -85,11 +82,11 @@ public class CustomerDto {
         this.birthDay = birthDay;
     }
 
-    public Integer getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Integer gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 

@@ -36,6 +36,10 @@ public class Facility {
     public Facility() {
     }
 
+    public Facility(Integer id) {
+        this.id = id;
+    }
+
     public Facility(Integer id, String name, Integer area, Double cost, Integer maxPeople, RentType rentType, FacilityType facilityType, String standardRoom, String otherDescription, Double poolArea, Integer numberFloor, String facilityFree, Set<Contract> contract) {
         this.id = id;
         this.name = name;

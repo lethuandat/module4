@@ -18,6 +18,11 @@ public class CustomerType {
     public CustomerType() {
     }
 
+
+    public CustomerType(Integer customerTypeId) {
+        this.customerTypeId = customerTypeId;
+    }
+
     public CustomerType(Integer customerTypeId, String customerTypeName, Set<Customer> customer) {
         this.customerTypeId = customerTypeId;
         this.customerTypeName = customerTypeName;

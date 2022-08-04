@@ -12,12 +12,10 @@ public class ContractDetail {
 
     @ManyToOne
     @JoinColumn(name = "contract_id", referencedColumnName = "id")
-    @JsonManagedReference
     private Contract contract;
 
     @ManyToOne
     @JoinColumn(name = "attach_facility_id", referencedColumnName = "id")
-    @JsonManagedReference
     private AttachFacility attachFacility;
 
     private Integer quantity;

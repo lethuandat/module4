@@ -86,9 +86,27 @@ public class FacilityController {
         }
 
         Facility facility = new Facility();
+
         BeanUtils.copyProperties(facilityDto, facility);
+
+        facility.setArea(Integer.parseInt(facilityDto.getArea()));
+
+        facility.setCost(Double.parseDouble(facilityDto.getCost()));
+
+        facility.setMaxPeople(Integer.parseInt(facilityDto.getMaxPeople()));
+
+        facility.setPoolArea(Double.parseDouble(facilityDto.getPoolArea()));
+
+        facility.setNumberFloor(Integer.parseInt(facilityDto.getNumberFloor()));
+
+        facility.setRentType(new RentType(Integer.parseInt(facilityDto.getRentType())));
+
+        facility.setFacilityType(new FacilityType(Integer.parseInt(facilityDto.getFacilityType())));
+
         facilityService.save(facility);
+
         redirectAttributes.addFlashAttribute("message", "Thêm mới thành công!");
+
         return "redirect:/facility";
     }
 
@@ -116,9 +134,27 @@ public class FacilityController {
         }
 
         Facility facility = new Facility();
+
         BeanUtils.copyProperties(facilityDto, facility);
+
+        facility.setArea(Integer.parseInt(facilityDto.getArea()));
+
+        facility.setCost(Double.parseDouble(facilityDto.getCost()));
+
+        facility.setMaxPeople(Integer.parseInt(facilityDto.getMaxPeople()));
+
+        facility.setPoolArea(Double.parseDouble(facilityDto.getPoolArea()));
+
+        facility.setNumberFloor(Integer.parseInt(facilityDto.getNumberFloor()));
+
+        facility.setRentType(new RentType(Integer.parseInt(facilityDto.getRentType())));
+
+        facility.setFacilityType(new FacilityType(Integer.parseInt(facilityDto.getFacilityType())));
+
         facilityService.save(facility);
+
         redirectAttributes.addFlashAttribute("message", "Cập nhật thành công!");
+
         return "redirect:/facility";
     }
 

@@ -27,7 +27,6 @@ public class Contract {
     private Facility facility;
 
     @OneToMany(mappedBy = "contract")
-    @JsonBackReference
     private Set<ContractDetail> contractDetail;
 
     public Contract() {

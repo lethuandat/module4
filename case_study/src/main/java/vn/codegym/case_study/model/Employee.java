@@ -39,6 +39,10 @@ public class Employee {
     private Set<Contract> contract;
     public Employee() {
     }
+
+    public Employee(Integer id) {
+        this.id = id;
+    }
     public Employee(Integer id, String name, String birthDay, String idCard, Double salary, String phone, String email, String address, Position position, EducationDegree educationDegree, Division division, User username, Set<Contract> contract) {
         this.id = id;
         this.name = name;

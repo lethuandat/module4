@@ -16,6 +16,10 @@ public class RentType {
     public RentType() {
     }
 
+    public RentType(Integer rentTypeId) {
+        this.rentTypeId = rentTypeId;
+    }
+
     public RentType(Integer rentTypeId, String rentTypeName, Set<Facility> facility) {
         this.rentTypeId = rentTypeId;
         this.rentTypeName = rentTypeName;

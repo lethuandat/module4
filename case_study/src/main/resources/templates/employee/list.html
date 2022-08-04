@@ -159,7 +159,7 @@
 
         <div class="col-lg-10 mt-4">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row" sec:authorize="hasAnyRole('ADMIN', 'USER')">
                     <caption><h2 align="center">Danh sách nhân viên</h2></caption>
                     <div class="row text-primary" th:if="${message}">
                         <h3 align="center" th:text="${message}"></h3>
@@ -174,7 +174,7 @@
                         </div>
                     </form>
 
-                    <table class="table table-striped table-bordered" id="tableCustomer" style="width:100%">
+                    <table sec:authorize="hasAnyRole('ADMIN', 'USER')" class="table table-striped table-bordered" id="tableCustomer" style="width:100%">
                         <thead>
                         <tr class="table-success">
                             <th>No.</th>
@@ -188,8 +188,8 @@
                             <th>Position</th>
                             <th>Education</th>
                             <th>Division</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th sec:authorize="hasRole('ADMIN')">Edit</th>
+                            <th sec:authorize="hasRole('ADMIN')">Delete</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -207,9 +207,9 @@
                             <td th:text="${employee.position == null ? '' : employee.position.getPositionName()}"></td>
                             <td th:text="${employee.educationDegree == null ? '' : employee.educationDegree.getEducationDegreeName()}"></td>
                             <td th:text="${employee.division == null ? '' : employee.division.getDivisionName()}"></td>
-                            <td>
+                            <td sec:authorize="hasRole('ADMIN')">
                                 <!-- Edit icon modal -->
-                                <a data-bs-toggle="modal" th:attr="data-bs-target='#editModal' + *{employee.id}">
+                                <a sec:authorize="hasRole('ADMIN')" data-bs-toggle="modal" th:attr="data-bs-target='#editModal' + *{employee.id}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                          class="bi bi-pencil" viewBox="0 0 16 16">
                                         <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
@@ -217,7 +217,7 @@
                                 </a>
 
                                 <!-- Edit Modal -->
-                                <div class="modal fade" th:id="*{'editModal' + {employee.id}}" data-bs-backdrop="static"
+                                <div sec:authorize="hasRole('ADMIN')" class="modal fade" th:id="*{'editModal' + {employee.id}}" data-bs-backdrop="static"
                                      data-bs-keyboard="false" tabindex="-1" aria-labelledby="editModalLabel"
                                      aria-hidden="true">
                                     <div class="modal-dialog">
@@ -321,9 +321,9 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                            <td sec:authorize="hasRole('ADMIN')">
                                 <!-- Delete icon modal -->
-                                <svg data-bs-toggle="modal"
+                                <svg sec:authorize="hasRole('ADMIN')" data-bs-toggle="modal"
                                      th:data-bs-target="'#deleteModal' + ${employee.id}"
                                      xmlns="http://www.w3.org/2000/svg"
                                      width="16" height="16" fill="currentColor"
@@ -334,7 +334,7 @@
                                 </svg>
 
                                 <!-- Delete Modal -->
-                                <div class="modal fade" th:id="deleteModal + ${employee.id}"
+                                <div sec:authorize="hasRole('ADMIN')" class="modal fade" th:id="deleteModal + ${employee.id}"
                                      data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                                      aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -371,7 +371,8 @@
                     <a th:href="@{'/employee'(page=${employeeList.number + 1})}" th:if="${employeeList.hasNext()}">&nbsp;
                         Next</a>
                 </div>
-                <div class="row">
+
+                <div class="row" sec:authorize="hasRole('ADMIN')">
                     <!-- Button create modal -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
                         Thêm mới nhân viên

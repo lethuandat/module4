@@ -11,6 +11,10 @@ import vn.codegym.case_study.model.Contract;
 import vn.codegym.case_study.model.ContractDetail;
 import vn.codegym.case_study.service.ContractDetailService;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 @RequestMapping("/contract_detail")
 public class ContractDetailController {
@@ -18,8 +22,21 @@ public class ContractDetailController {
     ContractDetailService contractDetailService;
 
     @PostMapping("/create")
-    public String create(@RequestParam("contract") Contract contract, @RequestParam("attachFacility") AttachFacility attachFacility, @RequestParam("quantity") Integer quantity, RedirectAttributes redirectAttributes) {
-        contractDetailService.save(new ContractDetail(contract, attachFacility, quantity));
+    public String create(@RequestParam("contract") Contract contract, @RequestParam("attachFacility") AttachFacility[] attachFacility, @RequestParam("quantity") Integer[] quantity, RedirectAttributes redirectAttributes) {
+        List<Integer> integerList = new ArrayList<>();
+
+        for (Integer i : quantity) {
+            if (i != 0) {
+                integerList.add(i);
+            }
+        }
+
+        quantity = integerList.toArray(new Integer[0]);
+
+        for (int i = 0; i < attachFacility.length; i++) {
+            contractDetailService.save(new ContractDetail(contract, attachFacility[i], quantity[i]));
+        }
+
         redirectAttributes.addFlashAttribute("message", "Thêm mới dịch vụ đi kèm thành công!");
         return "redirect:/contract";
     }

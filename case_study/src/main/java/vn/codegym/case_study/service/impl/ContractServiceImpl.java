@@ -55,12 +55,12 @@ public class ContractServiceImpl implements ContractService {
             for (int j = 0; j < contractDetailList.size(); j++) {
                 for (int k = 0; k < attachFacilityList.size(); k++) {
                     if (contractList.get(i).getId() == contractDetailList.get(j).getContract().getId() && contractDetailList.get(j).getAttachFacility().getId() == attachFacilityList.get(k).getId()) {
-                        totalMoney = totalMoney + (contractDetailList.get(j).getQuantity() * attachFacilityList.get(k).getCost());
+                        totalMoney = totalMoney + (contractDetailList.get(j).getQuantity() * attachFacilityList.get(k).getCost()) + contractList.get(i).getFacility().getCost();
                     }
                 }
             }
 
-            totalMoneyList.add(totalMoney + contractList.get(i).getDeposit());
+            totalMoneyList.add(totalMoney - contractList.get(i).getDeposit());
             totalMoney = 0;
         }
 

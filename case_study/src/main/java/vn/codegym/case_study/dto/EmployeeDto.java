@@ -5,7 +5,9 @@ import vn.codegym.case_study.model.EducationDegree;
 import vn.codegym.case_study.model.Position;
 import vn.codegym.case_study.model.User;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 public class EmployeeDto {
     private Integer id;
@@ -23,13 +25,12 @@ public class EmployeeDto {
     @Pattern(message = "*Không đúng định dạng (XXXXXXXXX với X là số từ 0 - 9)", regexp = "\\d{9}")
     private String idCard;
 
-    @NotEmpty(message = "*Không được để trống!")
-    @Min(value = 1, message = "*Phải nhập số > 0")
-    private Double salary;
-
+    @NotBlank(message = "*Không được để trống!")
+    @Pattern(regexp = "[1-9]+\\d*", message = "*Phải nhập số và lớn hơn 0")
+    private String salary;
 
     @NotBlank(message = "*Không được để trống!")
-    @Pattern(message = "*Không đúng định dạng (090XXXXXXX hoặc 091XXXXXXX với X là số từ 0 - 9)",regexp = "^090|091\\d{7}$")
+    @Pattern(message = "*Không đúng định dạng (090XXXXXXX hoặc 091XXXXXXX với X là số từ 0 - 9)", regexp = "^090|091\\d{7}$")
     private String phone;
 
     @NotBlank(message = "*Không được để trống!")
@@ -39,22 +40,22 @@ public class EmployeeDto {
     @NotBlank(message = "*Không được để trống!")
     private String address;
 
-    @NotNull(message = "*Không được để trống!")
-    private Position position;
+    @NotBlank(message = "*Không được để trống!")
+    private String position;
 
-    @NotNull(message = "*Không được để trống!")
-    private EducationDegree educationDegree;
+    @NotBlank(message = "*Không được để trống!")
+    private String educationDegree;
 
-    @NotNull(message = "*Không được để trống!")
-    private Division division;
+    @NotBlank(message = "*Không được để trống!")
+    private String division;
 
-    @NotNull(message = "*Không được để trống!")
-    private User username;
+    @NotBlank(message = "*Không được để trống!")
+    private String username;
 
     public EmployeeDto() {
     }
 
-    public EmployeeDto(Integer id, String name, String birthDay, String idCard, Double salary, String phone, String email, String address, Position position, EducationDegree educationDegree, Division division, User username) {
+    public EmployeeDto(Integer id, String name, String birthDay, String idCard, String salary, String phone, String email, String address, String position, String educationDegree, String division, String username) {
         this.id = id;
         this.name = name;
         this.birthDay = birthDay;
@@ -68,6 +69,7 @@ public class EmployeeDto {
         this.division = division;
         this.username = username;
     }
+
 
     public Integer getId() {
         return id;
@@ -101,11 +103,11 @@ public class EmployeeDto {
         this.idCard = idCard;
     }
 
-    public Double getSalary() {
+    public String getSalary() {
         return salary;
     }
 
-    public void setSalary(Double salary) {
+    public void setSalary(String salary) {
         this.salary = salary;
     }
 
@@ -133,35 +135,35 @@ public class EmployeeDto {
         this.address = address;
     }
 
-    public Position getPosition() {
+    public String getPosition() {
         return position;
     }
 
-    public void setPosition(Position position) {
+    public void setPosition(String position) {
         this.position = position;
     }
 
-    public EducationDegree getEducationDegree() {
+    public String getEducationDegree() {
         return educationDegree;
     }
 
-    public void setEducationDegree(EducationDegree educationDegree) {
+    public void setEducationDegree(String educationDegree) {
         this.educationDegree = educationDegree;
     }
 
-    public Division getDivision() {
+    public String getDivision() {
         return division;
     }
 
-    public void setDivision(Division division) {
+    public void setDivision(String division) {
         this.division = division;
     }
 
-    public User getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(User username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 }

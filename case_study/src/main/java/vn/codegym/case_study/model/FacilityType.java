@@ -16,6 +16,10 @@ public class FacilityType {
     public FacilityType() {
     }
 
+    public FacilityType(Integer facilityTypeId) {
+        this.facilityTypeId = facilityTypeId;
+    }
+
     public FacilityType(Integer facilityTypeId, String facilityTypeName, Set<Facility> facility) {
         this.facilityTypeId = facilityTypeId;
         this.facilityTypeName = facilityTypeName;

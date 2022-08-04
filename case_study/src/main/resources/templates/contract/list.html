@@ -216,27 +216,20 @@
                                                                        name="contract" hidden>
                                                                 <input type="text"
                                                                        th:value="${contract.facility.getName()}"
-                                                                       readonly>
+                                                                       class="form-control">
                                                             </td>
                                                         </tr>
-                                                        <tr>
-                                                            <th>Attach facility:</th>
-                                                            <td>
-                                                                <select class="form-select" name="attachFacility">
-                                                                    <option value="" selected>--Chọ dịch vụ đi kèm--
-                                                                    </option>
-                                                                    <option th:each="item : ${attachFacilityList}"
-                                                                            th:value="${item.id}"
-                                                                            th:text="${item.name}"></option>
-                                                                </select>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Số lượng:</th>
-                                                            <td>
-                                                                <input type="number" name="quantity">
-                                                            </td>
-                                                        </tr>
+                                                        <th:block th:each="item : ${attachFacilityList}">
+                                                            <tr>
+                                                                <td>
+                                                                    <input type="checkbox" name="attachFacility" th:id="*{'attach' + {item.id}}"
+                                                                           th:text="${item.name}" th:value="${item.id}" class="form-check">
+                                                                </td>
+                                                                <td>
+                                                                    <input type="number" name="quantity" th:id="*{'quantity' + {item.id}}" value="0" class="form-control">
+                                                                </td>
+                                                            </tr>
+                                                        </th:block>
 
                                                     </table>
                                                 </div>
@@ -285,25 +278,10 @@
                                                             <th:block
                                                                     th:if="${contractDetail.contract.getId() == contract.id && contractDetail.attachFacility.getId() == attachFacility.id}">
                                                                 <td th:text="${attachFacility.id}"></td>
-                                                            </th:block>
-                                                            <th:block
-                                                                    th:if="${contractDetail.contract.getId() == contract.id && contractDetail.attachFacility.getId() == attachFacility.id}">
                                                                 <td th:text="${attachFacility.name}"></td>
-                                                            </th:block>
-                                                            <th:block
-                                                                    th:if="${contractDetail.contract.getId() == contract.id && contractDetail.attachFacility.getId() == attachFacility.id}">
                                                                 <td th:text="${attachFacility.cost}"></td>
-                                                            </th:block>
-                                                            <th:block
-                                                                    th:if="${contractDetail.contract.getId() == contract.id && contractDetail.attachFacility.getId() == attachFacility.id}">
                                                                 <td th:text="${attachFacility.unit}"></td>
-                                                            </th:block>
-                                                            <th:block
-                                                                    th:if="${contractDetail.contract.getId() == contract.id && contractDetail.attachFacility.getId() == attachFacility.id}">
                                                                 <td th:text="${attachFacility.status}"></td>
-                                                            </th:block>
-                                                            <th:block
-                                                                    th:if="${contractDetail.contract.getId() == contract.id && contractDetail.attachFacility.getId() == attachFacility.id}">
                                                                 <td th:text="${contractDetail.quantity}"></td>
                                                             </th:block>
                                                         </th:block>
@@ -327,7 +305,8 @@
                 </div>
 
                 <div style="display: flex; color: #0a58ca; justify-content: center">
-                    <a th:href="@{'/contract'(page=${contractList.number - 1})}" th:if="${contractList.hasPrevious()}">Previous
+                    <a th:href="@{'/contract'(page=${contractList.number - 1})}"
+                       th:if="${contractList.hasPrevious()}">Previous
                         &nbsp;</a>
                     <label th:text="${contractList.number + 1}"></label>&nbsp; / &nbsp; <label
                         th:text="${contractList.totalPages}"></label>
@@ -380,5 +359,12 @@
 
 
 <script th:src="@{/bootstrap_502/js/bootstrap.min.js}"></script>
+<script>
+    $(document).ready(function () {
+        $("#attach1").click(function () {
+            $("#quantity1").toggle();
+        })
+    })
+</script>
 </body>
 </html>

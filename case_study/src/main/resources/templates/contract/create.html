@@ -180,7 +180,7 @@
                             <tr>
                                 <th>Dịch vụ:</th>
                                 <td>
-                                    <select class="form-select" th:field="*{facility.id}">
+                                    <select class="form-select" th:field="*{facility}">
                                         <option value="">--Chọn dịch vụ--</option>
                                         <option th:each="item : ${facilityList}" th:value="${item.id}"
                                                 th:text="${item.name}"></option>
@@ -193,7 +193,7 @@
                             <tr>
                                 <th>Khách hàng:</th>
                                 <td>
-                                    <select class="form-select" th:field="*{customer.id}">
+                                    <select class="form-select" th:field="*{customer}">
                                         <option value="">--Chọn khách hàng--</option>
                                         <option th:each="item : ${customerList}" th:value="${item.id}"
                                                 th:text="${item.name}"></option>
@@ -206,7 +206,7 @@
                             <tr>
                                 <th>Nhân viên:</th>
                                 <td>
-                                    <select class="form-select" th:field="*{employee.id}">
+                                    <select class="form-select" th:field="*{employee}">
                                         <option value="">--Chọn nhân viên--</option>
                                         <option th:each="item : ${employeeList}" th:value="${item.id}"
                                                 th:text="${item.name}"></option>
@@ -221,7 +221,6 @@
                                     <!-- Button trigger modal -->
                                     <input type="button" value="+" class="btn btn-primary" th:data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     </input>
-
 
                                 </td>
                             </tr>

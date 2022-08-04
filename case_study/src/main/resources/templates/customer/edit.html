@@ -166,7 +166,7 @@
                             <tr>
                                 <th>Customer Type:</th>
                                 <td>
-                                    <select class="form-select" th:field="*{customerType.customerTypeId}">
+                                    <select class="form-select" th:field="*{customerType}">
                                         <option value="">--Chọn loại khách</option>
                                         <option th:each="item : ${customerTypeList}" th:value="${item.customerTypeId}" th:text="${item.customerTypeName}"></option>
                                     </select>

@@ -161,7 +161,7 @@
                             <tr>
                                 <th>Facility type:</th>
                                 <td>
-                                    <select class="form-select" th:field="*{facilityType.facilityTypeId}" id="facilityTypeId" onchange="displayBonus(this)">
+                                    <select class="form-select" th:field="*{facilityType}" id="facilityTypeId" onchange="displayBonus(this)">
                                         <option value="">--Chọn loại dịch vụ--</option>
                                         <option th:each="item : ${facilityTypeList}" th:value="${item.facilityTypeId}" th:text="${item.facilityTypeName}"></option>
                                     </select>
@@ -200,7 +200,7 @@
                             <tr>
                                 <th>Rent type:</th>
                                 <td>
-                                    <select class="form-select" th:field="*{rentType.RentTypeId}">
+                                    <select class="form-select" th:field="*{rentType}">
                                         <option value="">--Chọn kiểu thuê--</option>
                                         <option th:each="item : ${rentTypeList}" th:value="${item.RentTypeId}" th:text="${item.RentTypeName}"></option>
                                     </select>

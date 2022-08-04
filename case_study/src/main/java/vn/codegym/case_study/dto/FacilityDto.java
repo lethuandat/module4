@@ -1,9 +1,7 @@
 package vn.codegym.case_study.dto;
 
-import vn.codegym.case_study.model.FacilityType;
-import vn.codegym.case_study.model.RentType;
-
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 public class FacilityDto {
     private Integer id;
@@ -12,22 +10,21 @@ public class FacilityDto {
     @Pattern(message = "*Không đúng định dạng (VD: Lê Văn An)", regexp = "^([A-Z\\p{L}]{1}[a-z\\p{L}]*)+(\\s([A-Z\\p{L}]{1}[a-z\\p{L}]*))*$")
     private String name;
 
+    @NotBlank(message = "*Không được để trống!")
+    private String area;
 
-    @Min(value = 1, message = "*Phải nhập số > 0")
-    private Integer area;
+    @NotBlank(message = "*Không được để trống!")
+    @Pattern(regexp = "[1-9]+\\d*", message = "*Phải nhập số và lớn hơn 0")
+    private String cost;
 
+    @NotBlank(message = "*Không được để trống!")
+    private String maxPeople;
 
-    @Min(value = 1, message = "*Phải nhập số > 0")
-    private Double cost;
+    @NotBlank(message = "*Không được để trống!")
+    private String rentType;
 
-    @Min(value = 1, message = "*Phải nhập số > 0")
-    private Integer maxPeople;
-
-    @NotNull(message = "*Không được để trống!")
-    private RentType rentType;
-
-    @NotNull(message = "*Không được để trống!")
-    private FacilityType facilityType;
+    @NotBlank(message = "*Không được để trống!")
+    private String facilityType;
 
     @NotBlank(message = "*Không được để trống!")
     private String standardRoom;
@@ -35,13 +32,13 @@ public class FacilityDto {
     @NotBlank(message = "*Không được để trống!")
     private String otherDescription;
 
+    @NotBlank(message = "*Không được để trống!")
+    @Pattern(regexp = "[1-9]+\\d*", message = "*Phải nhập số và lớn hơn 0")
+    private String poolArea;
 
-    @Min(value = 1, message = "*Phải nhập số > 0")
-    private Double poolArea;
-
-
-    @Min(value = 1, message = "*Phải nhập số > 0")
-    private Integer numberFloor;
+    @NotBlank(message = "*Không được để trống!")
+    @Pattern(regexp = "[1-9]+\\d*", message = "*Phải nhập số và lớn hơn 0")
+    private String numberFloor;
 
     @NotBlank(message = "*Không được để trống!")
     private String facilityFree;
@@ -49,7 +46,7 @@ public class FacilityDto {
     public FacilityDto() {
     }
 
-    public FacilityDto(Integer id, String name, Integer area, Double cost, Integer maxPeople, RentType rentType, FacilityType facilityType, String standardRoom, String otherDescription, Double poolArea, Integer numberFloor, String facilityFree) {
+    public FacilityDto(Integer id, String name, String area, String cost, String maxPeople, String rentType, String facilityType, String standardRoom, String otherDescription, String poolArea, String numberFloor, String facilityFree) {
         this.id = id;
         this.name = name;
         this.area = area;
@@ -80,43 +77,43 @@ public class FacilityDto {
         this.name = name;
     }
 
-    public Integer getArea() {
+    public String getArea() {
         return area;
     }
 
-    public void setArea(Integer area) {
+    public void setArea(String area) {
         this.area = area;
     }
 
-    public Double getCost() {
+    public String getCost() {
         return cost;
     }
 
-    public void setCost(Double cost) {
+    public void setCost(String cost) {
         this.cost = cost;
     }
 
-    public Integer getMaxPeople() {
+    public String getMaxPeople() {
         return maxPeople;
     }
 
-    public void setMaxPeople(Integer maxPeople) {
+    public void setMaxPeople(String maxPeople) {
         this.maxPeople = maxPeople;
     }
 
-    public RentType getRentType() {
+    public String getRentType() {
         return rentType;
     }
 
-    public void setRentType(RentType rentType) {
+    public void setRentType(String rentType) {
         this.rentType = rentType;
     }
 
-    public FacilityType getFacilityType() {
+    public String getFacilityType() {
         return facilityType;
     }
 
-    public void setFacilityType(FacilityType facilityType) {
+    public void setFacilityType(String facilityType) {
         this.facilityType = facilityType;
     }
 
@@ -136,19 +133,19 @@ public class FacilityDto {
         this.otherDescription = otherDescription;
     }
 
-    public Double getPoolArea() {
+    public String getPoolArea() {
         return poolArea;
     }
 
-    public void setPoolArea(Double poolArea) {
+    public void setPoolArea(String poolArea) {
         this.poolArea = poolArea;
     }
 
-    public Integer getNumberFloor() {
+    public String getNumberFloor() {
         return numberFloor;
     }
 
-    public void setNumberFloor(Integer numberFloor) {
+    public void setNumberFloor(String numberFloor) {
         this.numberFloor = numberFloor;
     }
 

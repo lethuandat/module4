@@ -1,6 +1,7 @@
 package vn.codegym.case_study.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -35,7 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 loginPage("/myLogin").
                 defaultSuccessUrl("/home").permitAll()
                 .and()
-                .authorizeRequests().
+                .authorizeRequests().requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
+                antMatchers("/bootstrap_502/**", "/css/**", "/js/**").permitAll().
+                antMatchers("/").permitAll().
+                antMatchers("/employee").permitAll().
                 antMatchers("/**").hasRole("ADMIN").
                 antMatchers( "/home", "/employee").hasRole("USER").
                 anyRequest().authenticated().

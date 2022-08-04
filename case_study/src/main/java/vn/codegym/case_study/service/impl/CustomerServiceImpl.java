@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import vn.codegym.case_study.model.Customer;
+import vn.codegym.case_study.model.CustomerType;
 import vn.codegym.case_study.repository.CustomerRepository;
 import vn.codegym.case_study.service.CustomerService;
 
@@ -26,6 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void save(Customer customer) {
+        customer.setCustomerType((CustomerType) customer.getCustomerType() );
         customerRepository.save(customer);
     }
 

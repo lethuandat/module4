@@ -71,6 +71,10 @@ public class CustomerController {
         }
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerDto, customer);
+
+        customer.setGender(Integer.parseInt(customerDto.getGender()));
+        customer.setCustomerType(new CustomerType(Integer.parseInt(customerDto.getCustomerType())));
+
         customerService.save(customer);
         redirectAttributes.addFlashAttribute("message", "Thêm mới thành công!");
         return "redirect:/customer";
@@ -93,6 +97,10 @@ public class CustomerController {
         }
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerDto, customer);
+
+        customer.setGender(Integer.parseInt(customerDto.getGender()));
+        customer.setCustomerType(new CustomerType(Integer.parseInt(customerDto.getCustomerType())));
+
         customerService.save(customer);
         redirectAttributes.addFlashAttribute("message", "Cập nhật thành công!");
         return "redirect:/customer";

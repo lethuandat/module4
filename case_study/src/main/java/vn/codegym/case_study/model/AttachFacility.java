@@ -16,7 +16,6 @@ public class AttachFacility {
     private String status;
 
     @OneToMany(mappedBy = "attachFacility")
-    @JsonBackReference
     private Set<ContractDetail> contractDetail;
 
     public AttachFacility() {

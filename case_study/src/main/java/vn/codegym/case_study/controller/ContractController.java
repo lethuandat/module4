@@ -42,7 +42,7 @@ public class ContractController {
     EmployeeService employeeService;
 
     @GetMapping
-    public String showPage(@PageableDefault(value =1005) Pageable pageable, Model model) {
+    public String showPage(@PageableDefault(value = 1005) Pageable pageable, Model model) {
         Page<Contract> contractList = contractService.findAll(pageable);
         Page<Facility> facilityList = facilityService.findAll(pageable);
         Page<Customer> customerList = customerService.findAll(pageable);
@@ -57,7 +57,6 @@ public class ContractController {
         model.addAttribute("attachFacilityList", attachFacilityList);
         model.addAttribute("totalMoneyList", totalMoneyList);
 
-        System.out.println(totalMoneyList);
         return "contract/list";
     }
 
@@ -94,6 +93,12 @@ public class ContractController {
 
         Contract contract = new Contract();
         BeanUtils.copyProperties(contractDto, contract);
+
+        contract.setDeposit(Double.parseDouble(contractDto.getDeposit()));
+        contract.setFacility(new Facility(Integer.parseInt(contractDto.getFacility())));
+        contract.setCustomer(new Customer(Integer.parseInt(contractDto.getCustomer())));
+        contract.setEmployee(new Employee(Integer.parseInt(contractDto.getEmployee())));
+
         contractService.save(contract);
 
         redirectAttributes.addFlashAttribute("message", "Thêm mới thành công!");

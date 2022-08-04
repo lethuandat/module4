@@ -1,10 +1,7 @@
 package vn.codegym.case_study.dto;
 
-import vn.codegym.case_study.model.Customer;
-import vn.codegym.case_study.model.Employee;
-import vn.codegym.case_study.model.Facility;
-
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 public class ContractDto {
     private Integer id;
@@ -15,22 +12,23 @@ public class ContractDto {
     @NotBlank(message = "*Không được để trống!")
     private String endDate;
 
-    @Min(value = 0, message = "*Phải nhập số >= 0")
-    private Double deposit;
+    @NotBlank(message = "*Không được để trống!")
+    @Pattern(regexp = "[1-9]+\\d*", message = "*Phải nhập số và lớn hơn 0")
+    private String deposit;
 
-    @NotNull(message = "*Không được để trống!")
-    private Employee employee;
+    @NotBlank(message = "*Không được để trống!")
+    private String employee;
 
-    @NotNull(message = "*Không được để trống!")
-    private Customer customer;
+    @NotBlank(message = "*Không được để trống!")
+    private String customer;
 
-    @NotNull(message = "*Không được để trống!")
-    private Facility facility;
+    @NotBlank(message = "*Không được để trống!")
+    private String facility;
 
     public ContractDto() {
     }
 
-    public ContractDto(Integer id, String startDate, String endDate, Double deposit, Employee employee, Customer customer, Facility facility) {
+    public ContractDto(Integer id, String startDate, String endDate, String deposit, String employee, String customer, String facility) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -64,35 +62,35 @@ public class ContractDto {
         this.endDate = endDate;
     }
 
-    public Double getDeposit() {
+    public String getDeposit() {
         return deposit;
     }
 
-    public void setDeposit(Double deposit) {
+    public void setDeposit(String deposit) {
         this.deposit = deposit;
     }
 
-    public Employee getEmployee() {
+    public String getEmployee() {
         return employee;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(String employee) {
         this.employee = employee;
     }
 
-    public Customer getCustomer() {
+    public String getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(String customer) {
         this.customer = customer;
     }
 
-    public Facility getFacility() {
+    public String getFacility() {
         return facility;
     }
 
-    public void setFacility(Facility facility) {
+    public void setFacility(String facility) {
         this.facility = facility;
     }
 }
