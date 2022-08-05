@@ -16,7 +16,6 @@ public class EmployeeDto {
     @Pattern(message = "*Không đúng định dạng (VD: Lê Văn An)", regexp = "^([A-Z\\p{L}]{1}[a-z\\p{L}]*)+(\\s([A-Z\\p{L}]{1}[a-z\\p{L}]*))*$")
     private String name;
 
-
     @NotBlank(message = "*Không được để trống!")
     private String birthDay;
 

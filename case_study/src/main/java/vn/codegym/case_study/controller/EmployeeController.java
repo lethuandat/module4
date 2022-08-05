@@ -1,5 +1,6 @@
 package vn.codegym.case_study.controller;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,11 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import vn.codegym.case_study.dto.EmployeeDto;
 import vn.codegym.case_study.model.*;
 import vn.codegym.case_study.service.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @CrossOrigin
@@ -35,8 +37,8 @@ public class EmployeeController {
     UserService userService;
 
     @GetMapping
-    public String showPage(@PageableDefault(value = 5) Pageable pageable, Model model) {
-        Page<Employee> employeeList = employeeService.findAll(pageable);
+    public String showPage(@PageableDefault(value = 5) Pageable pageable, @RequestParam Optional<String> keyword, Model model) {
+        Page<Employee> employeeList = employeeService.findAll(pageable, keyword.orElse(""));
         List<Division> divisionList = divisionService.findAll();
         List<Position> positionList = positionService.findAll();
         List<EducationDegree> educationDegreeList = educationDegreeService.findAll();
@@ -47,53 +49,54 @@ public class EmployeeController {
         model.addAttribute("positionList", positionList);
         model.addAttribute("educationDegreeList", educationDegreeList);
         model.addAttribute("userList", userList);
+        model.addAttribute("keyword", keyword.orElse(""));
 
         return "employee/list";
     }
 
-    @GetMapping("/search")
-    public String search(@PageableDefault(value = 5) Pageable pageable, String keyword, Model model) {
-        Page<Employee> employeeList = employeeService.search(keyword, pageable);
-        List<Division> divisionList = divisionService.findAll();
-        List<Position> positionList = positionService.findAll();
-        List<EducationDegree> educationDegreeList = educationDegreeService.findAll();
+    //  Thêm mới = AJAX 22:40 04-08-2022
+    @PostMapping("/create")
+    public ResponseEntity create(@RequestBody EmployeeDto employeeDto) {
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDto, employee);
 
-        if (employeeList.isEmpty()) {
-            model.addAttribute("message", "Không tìm thấy kết quả phù hợp!");
-            return "employee/list";
+        employee.setSalary(Double.parseDouble(employeeDto.getSalary()));
+        employee.setPosition(new Position(Integer.parseInt(employeeDto.getPosition())));
+        employee.setEducationDegree(new EducationDegree(Integer.parseInt(employeeDto.getEducationDegree())));
+        employee.setDivision(new Division(Integer.parseInt(employeeDto.getDivision())));
+        employee.setUsername(new User(employeeDto.getUsername()));
+
+        employeeService.save(employee);
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
+    //  Tìm 1 employee = AJAX 09:00 05-08-2022
+    @GetMapping("/{id}")
+    public ResponseEntity findOne(@PathVariable Integer id) {
+        return new ResponseEntity<>(employeeService.findById(id), HttpStatus.OK);
+    }
+
+    //  Cập nhật = AJAX 09:10 05-08-2022
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Employee> update(@PathVariable Integer id, @RequestBody EmployeeDto employeeDto) {
+        Employee currentEmployee = employeeService.findById(id);
+
+        if (currentEmployee == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        model.addAttribute("employeeList", employeeList);
-        model.addAttribute("divisionList", divisionList);
-        model.addAttribute("positionList", positionList);
-        model.addAttribute("educationDegreeList", educationDegreeList);
+        currentEmployee.setSalary(Double.parseDouble(employeeDto.getSalary()));
 
-        return "employee/list";
-    }
+        currentEmployee.setPosition(new Position(Integer.parseInt(employeeDto.getPosition())));
 
-    @PostMapping("/create")
-    public String create(@RequestParam("newName") String name, @RequestParam("newBirthDay") String birthDay, @RequestParam("newIdentity") String idCard, @RequestParam("newSalary") Double salary, @RequestParam("newPhone") String phone, @RequestParam("newEmail") String email, @RequestParam("newAddress") String address, @RequestParam("newPosition") Position position, @RequestParam("newEducationDegree") EducationDegree educationDegree, @RequestParam("newDivision") Division division, RedirectAttributes redirectAttributes) {
-        employeeService.save(new Employee(name, birthDay, idCard, salary, phone, email, address, position, educationDegree, division, null));
-        redirectAttributes.addFlashAttribute("message", "Thêm mới thành công!");
-        return "redirect:/employee";
-    }
+        currentEmployee.setEducationDegree(new EducationDegree(Integer.parseInt(employeeDto.getEducationDegree())));
 
-    @PostMapping("/update")
-    public String update(@RequestParam("id") Integer id, @RequestParam("name") String name, @RequestParam("birthDay") String birthDay, @RequestParam("idCard") String idCard, @RequestParam("salary") Double salary, @RequestParam("phone") String phone, @RequestParam("email") String email, @RequestParam("address") String address, @RequestParam("position") Position position, @RequestParam("educationDegree") EducationDegree educationDegree, @RequestParam("division") Division division, RedirectAttributes redirectAttributes) {
-        Employee employee = employeeService.findById(id);
-        employee.setName(name);
-        employee.setBirthDay(birthDay);
-        employee.setIdCard(idCard);
-        employee.setSalary(salary);
-        employee.setPhone(phone);
-        employee.setEmail(email);
-        employee.setAddress(address);
-        employee.setPosition(position);
-        employee.setEducationDegree(educationDegree);
-        employee.setDivision(division);
-        employeeService.save(employee);
-        redirectAttributes.addFlashAttribute("message", "Cập nhật thành công!");
-        return "redirect:/employee";
+        currentEmployee.setDivision(new Division(Integer.parseInt(employeeDto.getDivision())));
+
+        employeeService.save(currentEmployee);
+
+        return new ResponseEntity<>(currentEmployee, HttpStatus.OK);
+
     }
 
     @GetMapping("delete")

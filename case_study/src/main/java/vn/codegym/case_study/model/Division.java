@@ -19,6 +19,10 @@ public class Division {
     public Division() {
     }
 
+    public Division(int divisionId) {
+        this.divisionId = divisionId;
+    }
+
     public Division(int divisionId, String divisionName, Set<Employee> employee) {
         this.divisionId = divisionId;
         this.divisionName = divisionName;

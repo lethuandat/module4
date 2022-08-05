@@ -44,8 +44,8 @@ public class ContractController {
     @GetMapping
     public String showPage(@PageableDefault(value = 1005) Pageable pageable, Model model) {
         Page<Contract> contractList = contractService.findAll(pageable);
-        Page<Facility> facilityList = facilityService.findAll(pageable);
-        Page<Customer> customerList = customerService.findAll(pageable);
+        List<Facility> facilityList = facilityService.getList();
+        List<Customer> customerList = customerService.getList();
         List<ContractDetail> contractDetailList = contractDetailService.findAll();
         List<AttachFacility> attachFacilityList = attachFacilityService.findAll();
         List<Double> totalMoneyList = contractService.getTotalMoney();
@@ -61,10 +61,10 @@ public class ContractController {
     }
 
     @GetMapping("/create")
-    public String createForm(@PageableDefault(value = 5) Pageable pageable, Model model) {
-        Page<Facility> facilityList = facilityService.findAll(pageable);
-        Page<Customer> customerList = customerService.findAll(pageable);
-        Page<Employee> employeeList = employeeService.findAll(pageable);
+    public String createForm(Model model) {
+        List<Facility> facilityList = facilityService.getList();
+        List<Customer> customerList = customerService.getList();
+        List<Employee> employeeList = employeeService.getList();
         List<AttachFacility> attachFacilityList = attachFacilityService.findAll();
 
         model.addAttribute("facilityList", facilityList);
@@ -78,11 +78,11 @@ public class ContractController {
     }
 
     @PostMapping("/create")
-    public String create(@PageableDefault(value = 5) Pageable pageable, @Validated @ModelAttribute("contractDto") ContractDto contractDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+    public String create(@Validated @ModelAttribute("contractDto") ContractDto contractDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasFieldErrors()) {
-            Page<Facility> facilityList = facilityService.findAll(pageable);
-            Page<Customer> customerList = customerService.findAll(pageable);
-            Page<Employee> employeeList = employeeService.findAll(pageable);
+            List<Facility> facilityList = facilityService.getList();
+            List<Customer> customerList = customerService.getList();
+            List<Employee> employeeList = employeeService.getList();
 
             model.addAttribute("facilityList", facilityList);
             model.addAttribute("customerList", customerList);

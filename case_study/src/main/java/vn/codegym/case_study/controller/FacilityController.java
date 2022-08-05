@@ -12,12 +12,15 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.codegym.case_study.dto.FacilityDto;
-import vn.codegym.case_study.model.*;
+import vn.codegym.case_study.model.Facility;
+import vn.codegym.case_study.model.FacilityType;
+import vn.codegym.case_study.model.RentType;
 import vn.codegym.case_study.service.FacilityService;
 import vn.codegym.case_study.service.FacilityTypeService;
 import vn.codegym.case_study.service.RentTypeService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/facility")
@@ -32,32 +35,15 @@ public class FacilityController {
     RentTypeService rentTypeService;
 
     @GetMapping
-    public String showPage(@PageableDefault(value = 5) Pageable pageable, Model model) {
-        Page<Facility> facilityList = facilityService.findAll(pageable);
+    public String showPage(@PageableDefault(value = 5) Pageable pageable, @RequestParam Optional<String> keyword, Model model) {
+        Page<Facility> facilityList = facilityService.findAll(pageable, keyword.orElse(""));
         List<RentType> rentTypeList = rentTypeService.findAll();
         List<FacilityType> facilityTypeList = facilityTypeService.findAll();
 
         model.addAttribute("facilityList", facilityList);
         model.addAttribute("rentTypeList", rentTypeList);
         model.addAttribute("facilityTypeList", facilityTypeList);
-
-        return "facility/list";
-    }
-
-    @GetMapping("/search")
-    public String search(@PageableDefault(value = 5) Pageable pageable, String keyword, Model model) {
-        Page<Facility> facilityList = facilityService.search(keyword, pageable);
-        List<RentType> rentTypeList = rentTypeService.findAll();
-        List<FacilityType> facilityTypeList = facilityTypeService.findAll();
-
-        if (facilityList.isEmpty()) {
-            model.addAttribute("message", "Không tìm thấy kết quả phù hợp!");
-            return "facility/list";
-        }
-
-        model.addAttribute("facilityList", facilityList);
-        model.addAttribute("rentTypeList", rentTypeList);
-        model.addAttribute("facilityTypeList", facilityTypeList);
+        model.addAttribute("keyword", keyword.orElse(""));
 
         return "facility/list";
     }

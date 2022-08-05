@@ -1,5 +1,6 @@
 package vn.codegym.case_study.controller;
 
+import jdk.nashorn.internal.runtime.options.Option;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,8 @@ import vn.codegym.case_study.service.CustomerService;
 import vn.codegym.case_study.service.CustomerTypeService;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/customer")
@@ -28,29 +31,11 @@ public class CustomerController {
     CustomerTypeService customerTypeService;
 
     @GetMapping
-    public String showPage(@PageableDefault(value = 5) Pageable pageable, Model model) {
-        Page<Customer> customerList = customerService.findAll(pageable);
+    public String showPage(@PageableDefault(value = 5) Pageable pageable, @RequestParam Optional<String> keyword, Model model) {
+        model.addAttribute("keyword", keyword.orElse(""));
         List<CustomerType> customerTypeList = customerTypeService.findAll();
-
-        model.addAttribute("customerList", customerList);
         model.addAttribute("customerTypeList", customerTypeList);
-
-        return "customer/list";
-    }
-
-    @GetMapping("/search")
-    public String search(@PageableDefault(value = 5) Pageable pageable, String keyword, Model model) {
-        Page<Customer> customerList = customerService.search(keyword, pageable);
-        List<CustomerType> customerTypeList = customerTypeService.findAll();
-
-        if (customerList.isEmpty()) {
-            model.addAttribute("message", "Không tìm thấy kết quả phù hợp!");
-            return "customer/list";
-        }
-
-        model.addAttribute("customerList", customerList);
-        model.addAttribute("customerTypeList", customerTypeList);
-
+        model.addAttribute("customerList", customerService.findAll(pageable, keyword.orElse("")));
         return "customer/list";
     }
 
@@ -69,6 +54,7 @@ public class CustomerController {
             model.addAttribute("customerTypeList", customerTypeList);
             return "/customer/create";
         }
+
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerDto, customer);
 

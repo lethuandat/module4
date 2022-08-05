@@ -8,14 +8,22 @@ import vn.codegym.case_study.model.Employee;
 import vn.codegym.case_study.repository.EmployeeRepository;
 import vn.codegym.case_study.service.EmployeeService;
 
+import java.util.List;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
+
     @Override
-    public Page<Employee> findAll(Pageable pageable) {
-        return employeeRepository.findAll(pageable);
+    public Page<Employee> findAll(Pageable pageable, String keyword) {
+        return employeeRepository.findAll(pageable, "%" + keyword + "%");
+    }
+
+    @Override
+    public List<Employee> getList() {
+        return employeeRepository.findAll();
     }
 
     @Override
@@ -33,8 +41,4 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-    @Override
-    public Page<Employee> search(String keyword, Pageable pageable) {
-        return employeeRepository.findAllByNameContainsOrEmailContainsOrAddressContains(keyword, keyword, keyword, pageable);
-    }
 }

@@ -8,6 +8,7 @@ import vn.codegym.case_study.model.Facility;
 import vn.codegym.case_study.repository.FacilityRepository;
 import vn.codegym.case_study.service.FacilityService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,9 +16,15 @@ public class FacilityServiceImpl implements FacilityService {
     @Autowired
     FacilityRepository facilityRepository;
 
+
     @Override
-    public Page<Facility> findAll(Pageable pageable) {
-        return facilityRepository.findAll(pageable);
+    public Page<Facility> findAll(Pageable pageable, String keyword) {
+        return facilityRepository.findAll(pageable, "%" + keyword + "%");
+    }
+
+    @Override
+    public List<Facility> getList() {
+        return facilityRepository.findAll();
     }
 
     @Override
@@ -35,8 +42,4 @@ public class FacilityServiceImpl implements FacilityService {
         facilityRepository.deleteById(id);
     }
 
-    @Override
-    public Page<Facility> search(String keyword, Pageable pageable) {
-        return facilityRepository.findAllByNameContainsOrOtherDescriptionContainsOrFacilityFreeContains(keyword, keyword, keyword, pageable);
-    }
 }

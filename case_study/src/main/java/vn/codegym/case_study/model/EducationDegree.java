@@ -19,6 +19,10 @@ public class EducationDegree {
     public EducationDegree() {
     }
 
+    public EducationDegree(int educationDegreeId) {
+        this.educationDegreeId = educationDegreeId;
+    }
+
     public EducationDegree(int educationDegreeId, String educationDegreeName, Set<Employee> employee) {
         this.educationDegreeId = educationDegreeId;
         this.educationDegreeName = educationDegreeName;

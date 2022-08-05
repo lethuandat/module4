@@ -9,6 +9,7 @@ import vn.codegym.case_study.model.CustomerType;
 import vn.codegym.case_study.repository.CustomerRepository;
 import vn.codegym.case_study.service.CustomerService;
 
+import java.util.List;
 import java.util.Optional;
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -16,8 +17,13 @@ public class CustomerServiceImpl implements CustomerService {
     CustomerRepository customerRepository;
 
     @Override
-    public Page<Customer> findAll(Pageable pageable) {
-        return customerRepository.findAll(pageable);
+    public Page<Customer> findAll(Pageable pageable, String keyword) {
+        return customerRepository.findAll(pageable, "%" + keyword + "%");
+    }
+
+    @Override
+    public List<Customer> getList() {
+        return customerRepository.findAll();
     }
 
     @Override
@@ -36,8 +42,4 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.deleteById(id);
     }
 
-    @Override
-    public Page<Customer> search(String keyword, Pageable pageable) {
-        return customerRepository.findAllByNameContainsOrEmailContainsOrAddressContains(keyword, keyword, keyword,pageable);
-    }
 }

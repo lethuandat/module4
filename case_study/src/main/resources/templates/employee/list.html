@@ -109,7 +109,9 @@
                         <a href="/logout">Đăng xuất</a>
                     </div>
                     <div sec:authorize="isAnonymous()">
-                        <a href="/login"><button class="btn btn-outline-success" type="button">Đăng nhập</button></a>
+                        <a href="/login">
+                            <button class="btn btn-outline-success" type="button">Đăng nhập</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -159,12 +161,104 @@
 
         <div class="col-lg-10 mt-4">
             <div class="container-fluid">
+
+                <script type="text/javascript">
+
+                    $(document).ready(function () {
+                        function infoEmployee(id) {
+                            $.ajax({
+                                url: "http://localhost:8080/employee/" + id,
+                                method: "get",
+                                dataType: "json",
+                                success: function (data) {
+                                    $("#id").val(data.id);
+                                    $("#name").val(data.name);
+                                    $("#birthDay").val(data.birthDay);
+                                    $("#idCard").val(data.idCard);
+                                    $("#salary").val(data.salary);
+                                    $("#phone").val(data.phone);
+                                    $("#email").val(data.email);
+                                    $("#address").val(data.address);
+                                    $("#position").val(data.position.positionName);
+                                    $("#educationDegree").val(data.educationDegree.educationDegreeName);
+                                    $("#division").val(data.division.divisionName);
+                                },
+                                error: function (error) {
+                                    alert(error);
+                                }
+                            })
+                        }
+
+                        $("#createBtn").click(function () {
+                            let employee = {};
+
+                            employee.name = $("#newName").val();
+                            employee.birthDay = $("#newBirthDay").val();
+                            employee.idCard = $("#newIdentity").val();
+                            employee.salary = $("#newSalary").val();
+                            employee.phone = $("#newPhone").val();
+                            employee.email = $("#newEmail").val();
+                            employee.address = $("#newAddress").val();
+                            employee.position = $("#newPosition").val();
+                            employee.educationDegree = $("#newEducationDegree").val();
+                            employee.division = $("#newDivision").val();
+                            employee.username = $("#newEmail").val();
+
+                            $.ajax({
+                                url: "http://localhost:8080/employee/create",
+                                method: "post",
+                                data: JSON.stringify(employee),
+                                contentType: "application/json;charset=utf-8",
+                                success: function () {
+                                    alert("Thêm mới thành công!");
+                                },
+                                error: function (error) {
+                                    alert(error);
+                                }
+                            })
+                        })
+
+                        $("#updateBtn").click(function () {
+                            let employee = {};
+
+                            let employeeId = $("#id").val();
+
+                            employee.name = $("#name").val();
+                            employee.birthDay = $("#birthDay").val();
+                            employee.idCard = $("#idCard").val();
+                            employee.salary = $("#salary").val();
+                            employee.phone = $("#phone").val();
+                            employee.email = $("#email").val();
+                            employee.address = $("#address").val();
+                            employee.position = $("#position").val();
+                            employee.educationDegree = $("#educationDegree").val();
+                            employee.division = $("#division").val();
+
+                            $.ajax({
+                                url: "http://localhost:8080/employee/update/" + employeeId,
+                                method: "put",
+                                data: JSON.stringify(employee),
+                                contentType: "application/json;charset=utf-8",
+                                success: function () {
+                                    alert("Cập nhật thành công!");
+                                },
+                                error: function (error) {
+                                    alert(error);
+                                }
+                            })
+                        })
+
+                    })
+
+
+                </script>
+
                 <div class="row" sec:authorize="hasAnyRole('ADMIN', 'USER')">
                     <caption><h2 align="center">Danh sách nhân viên</h2></caption>
                     <div class="row text-primary" th:if="${message}">
                         <h3 align="center" th:text="${message}"></h3>
                     </div>
-                    <form class="row g-3" th:action="@{/employee/search}" method="get">
+                    <form class="row g-3" th:action="@{/employee}" method="get">
                         <div class="col-auto">
                             <input type="text" hidden name="action" value="search">
                             <input type="text" class="form-control" name="keyword" placeholder="Search Anything">
@@ -174,7 +268,8 @@
                         </div>
                     </form>
 
-                    <table sec:authorize="hasAnyRole('ADMIN', 'USER')" class="table table-striped table-bordered" id="tableCustomer" style="width:100%">
+                    <table sec:authorize="hasAnyRole('ADMIN', 'USER')" class="table table-striped table-bordered"
+                           id="tableEmployee" style="width:100%">
                         <thead>
                         <tr class="table-success">
                             <th>No.</th>
@@ -208,118 +303,13 @@
                             <td th:text="${employee.educationDegree == null ? '' : employee.educationDegree.getEducationDegreeName()}"></td>
                             <td th:text="${employee.division == null ? '' : employee.division.getDivisionName()}"></td>
                             <td sec:authorize="hasRole('ADMIN')">
-                                <!-- Edit icon modal -->
-                                <a sec:authorize="hasRole('ADMIN')" data-bs-toggle="modal" th:attr="data-bs-target='#editModal' + *{employee.id}">
+                                <a sec:authorize="hasRole('ADMIN')" data-bs-toggle="modal" data-bs-target="#editModal"
+                                   th:onclick="'infoEmployee(' + *{employee.id} + ')'">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                          class="bi bi-pencil" viewBox="0 0 16 16">
                                         <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
                                     </svg>
                                 </a>
-
-                                <!-- Edit Modal -->
-                                <div sec:authorize="hasRole('ADMIN')" class="modal fade" th:id="*{'editModal' + {employee.id}}" data-bs-backdrop="static"
-                                     data-bs-keyboard="false" tabindex="-1" aria-labelledby="editModalLabel"
-                                     aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <form th:action="@{/employee/update}" method="post">
-                                            <div class="modal-content">
-                                                <div class="modal-header bg-primary">
-                                                    <h5 class="modal-title text-white" id="editModalLabel">Cập nhật</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <table class="table">
-                                                        <tr>
-                                                            <th>ID:</th>
-                                                            <td><input readonly class="form-control" type="text"
-                                                                       name="id" th:value="*{employee.id}"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Họ tên:</th>
-                                                            <td><input type="text" class="form-control" name="name"
-                                                                       th:value="*{employee.name}"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Ngày sinh:</th>
-                                                            <td><input class="form-control" type="date" name="birthDay"
-                                                                       th:value="*{employee.birthDay}"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Số căn cước:</th>
-                                                            <td><input class="form-control" type="text" name="idCard"
-                                                                       th:value="*{employee.idCard}"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Lương:</th>
-                                                            <td><input class="form-control" type="text" name="salary"
-                                                                       th:value="*{employee.salary}"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Số điện thoại:</th>
-                                                            <td><input class="form-control" type="text" name="phone"
-                                                                       th:value="*{employee.phone}"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Email:</th>
-                                                            <td><input class="form-control" type="text" name="email"
-                                                                       th:value="*{employee.email}"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Địa chỉ:</th>
-                                                            <td><input class="form-control" type="text" name="address"
-                                                                       th:value="*{employee.address}"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Vị trí:</th>
-                                                            <td>
-                                                                <select class="form-select" name="position"
-                                                                        th:value="${employee.position.getPositionId()}">
-                                                                    <option value="">--Chọn vị trí--</option>
-
-                                                                    <option th:each="item : ${positionList}"
-                                                                            th:value="${item.positionId}"
-                                                                            th:text="${item.positionName}"></option>
-
-                                                                </select>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Bằng cấp:</th>
-                                                            <td>
-                                                                <select class="form-select" name="educationDegree"
-                                                                        th:value="${employee.educationDegree.educationDegreeName}">
-                                                                    <option value="">--Chọn bằng cấp--</option>
-                                                                    <option th:each="item : ${educationDegreeList}"
-                                                                            th:value="${item.educationDegreeId}"
-                                                                            th:text="${item.educationDegreeName}"></option>
-                                                                </select>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Phòng ban:</th>
-                                                            <td>
-                                                                <select class="form-select"
-                                                                        th:value="${employee.division.divisionName}" name="division">
-                                                                    <option value="">--Chọn phòng ban--</option>
-                                                                    <option th:each="item : ${divisionList}"
-                                                                            th:value="${item.divisionId}"
-                                                                            th:text="${item.divisionName}"></option>
-                                                                </select>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Đóng
-                                                    </button>
-                                                    <button type="submit" class="btn btn-primary">Lưu</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
                             </td>
                             <td sec:authorize="hasRole('ADMIN')">
                                 <!-- Delete icon modal -->
@@ -334,7 +324,8 @@
                                 </svg>
 
                                 <!-- Delete Modal -->
-                                <div sec:authorize="hasRole('ADMIN')" class="modal fade" th:id="deleteModal + ${employee.id}"
+                                <div sec:authorize="hasRole('ADMIN')" class="modal fade"
+                                     th:id="deleteModal + ${employee.id}"
                                      data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                                      aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -364,11 +355,11 @@
                     </table>
                 </div>
                 <div style="display: flex; color: #0a58ca; justify-content: center">
-                    <a th:href="@{'/employee'(page=${employeeList.number - 1})}" th:if="${employeeList.hasPrevious()}">Previous
+                    <a th:href="@{'/employee'(page=${employeeList.number - 1}, keyword = ${keyword})}" th:if="${employeeList.hasPrevious()}">Previous
                         &nbsp;</a>
                     <label th:text="${employeeList.number + 1}"></label>&nbsp; / &nbsp; <label
                         th:text="${employeeList.totalPages}"></label>
-                    <a th:href="@{'/employee'(page=${employeeList.number + 1})}" th:if="${employeeList.hasNext()}">&nbsp;
+                    <a th:href="@{'/employee'(page=${employeeList.number + 1}, keyword = ${keyword})}" th:if="${employeeList.hasNext()}">&nbsp;
                         Next</a>
                 </div>
 
@@ -394,69 +385,86 @@
                                         <table class="table" cellpadding="5">
                                             <tr>
                                                 <th>Họ tên:</th>
-                                                <td><input class="form-control" type="text" name="newName"></td>
+                                                <td>
+                                                    <input class="form-control" type="text" id="newName">
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th>Ngày sinh:</th>
-                                                <td><input class="form-control" type="date" name="newBirthDay">
+                                                <td>
+                                                    <input class="form-control" type="date" id="newBirthDay">
+
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th>Số căn cước:</th>
-                                                <td><input class="form-control" type="text" name="newIdentity">
+                                                <td>
+                                                    <input class="form-control" type="text" id="newIdentity">
+
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th>Lương:</th>
-                                                <td><input class="form-control" type="text" name="newSalary">
+                                                <td>
+                                                    <input class="form-control" type="text" id="newSalary">
+
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th>Số điện thoại:</th>
-                                                <td><input class="form-control" type="text" name="newPhone">
+                                                <td>
+                                                    <input class="form-control" type="text" id="newPhone">
+
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th>Email:</th>
-                                                <td><input class="form-control" type="text" name="newEmail">
+                                                <td>
+                                                    <input class="form-control" type="text" id="newEmail">
+
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th>Địa chỉ:</th>
-                                                <td><input class="form-control" type="text" name="newAddress">
+                                                <td>
+                                                    <input class="form-control" type="text" id="newAddress">
+
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th>Vị trí:</th>
                                                 <td>
-                                                    <select class="form-select" name="newPosition">
+                                                    <select class="form-select" id="newPosition">
                                                         <option value="" selected>--Chọn vị trí--</option>
                                                         <option th:each="item : ${positionList}"
                                                                 th:value="${item.positionId}"
                                                                 th:text="${item.positionName}"></option>
                                                     </select>
+
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th>Bằng cấp:</th>
                                                 <td>
-                                                    <select class="form-select" name="newEducationDegree">
+                                                    <select class="form-select" id="newEducationDegree">
                                                         <option value="" selected>--Chọn bằng cấp--</option>
                                                         <option th:each="item : ${educationDegreeList}"
                                                                 th:value="${item.educationDegreeId}"
                                                                 th:text="${item.educationDegreeName}"></option>
                                                     </select>
+
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th>Phòng ban:</th>
                                                 <td>
-                                                    <select class="form-select" name="newDivision">
+                                                    <select class="form-select" id="newDivision">
                                                         <option value="" selected>--Chọn phòng ban--</option>
                                                         <option th:each="item : ${divisionList}"
                                                                 th:value="${item.divisionId}"
                                                                 th:text="${item.divisionName}"></option>
                                                     </select>
+
                                                 </td>
                                             </tr>
                                         </table>
@@ -465,7 +473,7 @@
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                             Đóng
                                         </button>
-                                        <button type="submit" id="addBtn" class="btn btn-primary">Lưu</button>
+                                        <button type="button" id="createBtn" class="btn btn-primary">Lưu</button>
                                     </div>
                                 </div>
                             </form>
@@ -479,6 +487,98 @@
     </div>
 </div>
 <hr>
+
+<!--Update modal-->
+<div sec:authorize="hasRole('ADMIN')" class="modal fade" id="editModal" data-bs-backdrop="static"
+     data-bs-keyboard="false" tabindex="-1" aria-labelledby="editModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white" id="editModalLabel">Cập nhật</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tr>
+                        <th>ID:</th>
+                        <td><input readonly class="form-control" type="text"
+                                   id="id"></td>
+                    </tr>
+                    <tr>
+                        <th>Họ tên:</th>
+                        <td><input type="text" class="form-control" id="name"></td>
+                    </tr>
+                    <tr>
+                        <th>Ngày sinh:</th>
+                        <td><input class="form-control" type="date" id="birthDay"></td>
+                    </tr>
+                    <tr>
+                        <th>Số căn cước:</th>
+                        <td><input class="form-control" type="text" id="idCard"></td>
+                    </tr>
+                    <tr>
+                        <th>Lương:</th>
+                        <td><input class="form-control" type="text" id="salary"></td>
+                    </tr>
+                    <tr>
+                        <th>Số điện thoại:</th>
+                        <td><input class="form-control" type="text" id="phone"></td>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td><input class="form-control" type="text" id="email"></td>
+                    </tr>
+                    <tr>
+                        <th>Địa chỉ:</th>
+                        <td><input class="form-control" type="text" id="address"></td>
+                    </tr>
+                    <tr>
+                        <th>Vị trí:</th>
+                        <td>
+                            <select class="form-select" id="position">
+                                <option value="">--Chọn vị trí--</option>
+                                <option th:each="item : ${positionList}"
+                                        th:value="${item.positionId}"
+                                        th:text="${item.positionName}"></option>
+
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Bằng cấp:</th>
+                        <td>
+                            <select class="form-select" id="educationDegree">
+                                <option value="">--Chọn bằng cấp--</option>
+                                <option th:each="item : ${educationDegreeList}"
+                                        th:value="${item.educationDegreeId}"
+                                        th:text="${item.educationDegreeName}"></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Phòng ban:</th>
+                        <td>
+                            <select class="form-select" id="division">
+                                <option value="">--Chọn phòng ban--</option>
+                                <option th:each="item : ${divisionList}"
+                                        th:value="${item.divisionId}"
+                                        th:text="${item.divisionName}"></option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Đóng
+                </button>
+                <button type="button" id="updateBtn" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="container-fluid">
     <div class="row mt-4">
@@ -509,6 +609,8 @@
         </div>
     </div>
 </div>
+
+
 <script th:src="@{/bootstrap_502/js/bootstrap.min.js}"></script>
 </body>
 </html>

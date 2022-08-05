@@ -222,11 +222,11 @@
                                                         <th:block th:each="item : ${attachFacilityList}">
                                                             <tr>
                                                                 <td>
-                                                                    <input type="checkbox" name="attachFacility" th:id="*{'attach' + {item.id}}"
+                                                                    <input type="checkbox" name="attachFacility" th:class="*{'attach' + {item.id}}"
                                                                            th:text="${item.name}" th:value="${item.id}" class="form-check">
                                                                 </td>
                                                                 <td>
-                                                                    <input type="number" name="quantity" th:id="*{'quantity' + {item.id}}" value="0" class="form-control">
+                                                                    <input type="number" name="quantity" th:class="*{'quantity' + {item.id}}" value="0" class="form-control">
                                                                 </td>
                                                             </tr>
                                                         </th:block>
@@ -361,8 +361,28 @@
 <script th:src="@{/bootstrap_502/js/bootstrap.min.js}"></script>
 <script>
     $(document).ready(function () {
-        $("#attach1").click(function () {
-            $("#quantity1").toggle();
+        $(".attach1").click(function () {
+            $(".quantity1").show();
+        })
+
+        $(".attach2").click(function () {
+            $(".quantity2").show();
+        })
+
+        $(".attach3").click(function () {
+            $(".quantity3").show();
+        })
+
+        $(".attach4").click(function () {
+            $(".quantity4").show();
+        })
+
+        $(".attach5").click(function () {
+            $(".quantity5").show();
+        })
+
+        $(".attach6").click(function () {
+            $(".quantity6").show();
         })
     })
 </script>

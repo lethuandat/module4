@@ -4,8 +4,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import vn.codegym.case_study.model.Employee;
 
+import java.util.List;
+
 public interface EmployeeService {
-    Page<Employee> findAll(Pageable pageable);
+    Page<Employee> findAll(Pageable pageable, String keyword);
+
+
+    List<Employee> getList();
 
     Employee findById(Integer id);
 
@@ -13,5 +18,4 @@ public interface EmployeeService {
 
     void remove(Integer id);
 
-    Page<Employee> search(String keyword, Pageable pageable);
 }

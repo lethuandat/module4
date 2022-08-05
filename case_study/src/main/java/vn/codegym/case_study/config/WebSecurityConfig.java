@@ -34,9 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().
                 formLogin().
                 loginPage("/myLogin").
-                defaultSuccessUrl("/home").permitAll()
-                .and()
-                .authorizeRequests().requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
+                defaultSuccessUrl("/home").permitAll();
+
+        http.authorizeRequests().requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
                 antMatchers("/bootstrap_502/**", "/css/**", "/js/**").permitAll().
                 antMatchers("/").permitAll().
                 antMatchers("/employee").permitAll().
@@ -44,7 +44,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers( "/home", "/employee").hasRole("USER").
                 anyRequest().authenticated().
                 and().
+                rememberMe().userDetailsService(myUserDetailService).
+                and().
+                logout(logout ->logout.deleteCookies("dummyCookie")).
                 exceptionHandling().accessDeniedPage("/access-denied");
+
 
         http.authorizeRequests().and().rememberMe().tokenRepository(persistentTokenRepository()).tokenValiditySeconds(24 * 60 * 60);
 
