@@ -3,6 +3,7 @@ package vn.codegym.case_study.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Entity(name = "customer")
@@ -20,18 +21,18 @@ public class Customer {
     private String name;
 
     @Column(name = "customer_birthday")
-    private String birthDay;
+    private LocalDate birthDay;
 
     @Column(name = "customer_gender")
-    private Integer gender;
+    private Boolean gender;
 
-    @Column(name = "customer_id_card")
+    @Column(name = "customer_id_card", unique = true)
     private String idCard;
 
-    @Column(name = "customer_phone")
+    @Column(name = "customer_phone", unique = true)
     private String phone;
 
-    @Column(name = "customer_email")
+    @Column(name = "customer_email", unique = true)
     private String email;
 
     @Column(name = "customer_address")
@@ -44,12 +45,11 @@ public class Customer {
     public Customer() {
     }
 
-
     public Customer(Integer id) {
         this.id = id;
     }
 
-    public Customer(Integer id, CustomerType customerType, String name, String birthDay, Integer gender, String idCard, String phone, String email, String address, Set<Contract> contract) {
+    public Customer(Integer id, CustomerType customerType, String name, LocalDate birthDay, Boolean gender, String idCard, String phone, String email, String address, Set<Contract> contract) {
         this.id = id;
         this.customerType = customerType;
         this.name = name;
@@ -86,19 +86,19 @@ public class Customer {
         this.name = name;
     }
 
-    public String getBirthDay() {
+    public LocalDate getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(String birthDay) {
+    public void setBirthDay(LocalDate birthDay) {
         this.birthDay = birthDay;
     }
 
-    public Integer getGender() {
+    public Boolean getGender() {
         return gender;
     }
 
-    public void setGender(Integer gender) {
+    public void setGender(Boolean gender) {
         this.gender = gender;
     }
 

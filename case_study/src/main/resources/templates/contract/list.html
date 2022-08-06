@@ -181,7 +181,7 @@
                         <tbody>
                         <tr th:each="contract, i  : ${contractList}">
 
-                            <td th:text="${i.count}"></td>
+                            <td th:text="${i.count} + 5 * ${contractList.number}"></td>
                             <td th:text="${contract.facility == null ? '' : contract.facility.getName()}"></td>
                             <td th:text="${contract.customer == null ? '' : contract.customer.getName()}"></td>
                             <td th:text="${contract.startDate}"></td>

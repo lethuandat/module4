@@ -215,35 +215,35 @@
                                     <input class="form-check-input" type="radio" th:field="*{standardRoom}" value="Professional"> Professional
                                     <input class="form-check-input" type="radio" th:field="*{standardRoom}" value="Standard"> Standard
                                     <input class="form-check-input" type="radio" th:field="*{standardRoom}" value="Normal"> Normal
-                                    <span class="text-danger" th:if="${#fields.hasErrors('standardRoom')}" th:errors="*{standardRoom}"></span>
+                                    <span id="standardRoomErr" class="text-danger" th:if="${#fields.hasErrors('standardRoom')}" th:errors="*{standardRoom}"></span>
                                 </td>
                             </tr>
                             <tr hidden id="otherDescription">
                                 <th>Other Description:</th>
                                 <td>
                                     <input class="form-control" type="text" th:field="*{otherDescription}" size="45"/>
-                                    <span class="text-danger" th:if="${#fields.hasErrors('otherDescription')}" th:errors="*{otherDescription}"></span>
+                                    <span id="otherDescriptionErr" class="text-danger" th:if="${#fields.hasErrors('otherDescription')}" th:errors="*{otherDescription}"></span>
                                 </td>
                             </tr>
                             <tr hidden id="poolArea">
                                 <th>Pool Area:</th>
                                 <td>
                                     <input class="form-control" type="text" th:field="*{poolArea}" size="45"/>
-                                    <span class="text-danger" th:if="${#fields.hasErrors('poolArea')}" th:errors="*{poolArea}"></span>
+                                    <span id="poolAreaErr" class="text-danger" th:if="${#fields.hasErrors('poolArea')}" th:errors="*{poolArea}"></span>
                                 </td>
                             </tr>
                             <tr hidden id="numberFloor">
                                 <th>Number of Floors:</th>
                                 <td>
                                     <input class="form-control" type="text" th:field="*{numberFloor}" size="45"/>
-                                    <span class="text-danger" th:if="${#fields.hasErrors('numberFloor')}" th:errors="*{numberFloor}"></span>
+                                    <span id="numberFloorErr" class="text-danger" th:if="${#fields.hasErrors('numberFloor')}" th:errors="*{numberFloor}"></span>
                                 </td>
                             </tr>
                             <tr hidden id="facilityFree">
                                 <th>Facility Free:</th>
                                 <td>
                                     <input class="form-control" type="text" th:field="*{facilityFree}" size="45"/>
-                                    <span class="text-danger" th:if="${#fields.hasErrors('facilityFree')}" th:errors="*{facilityFree}"></span>
+                                    <span id="facilityFreeErr" class="text-danger" th:if="${#fields.hasErrors('facilityFree')}" th:errors="*{facilityFree}"></span>
                                 </td>
                             </tr>
                             <tr>
@@ -315,20 +315,31 @@
             document.getElementById("standardRoom").hidden = false;
             document.getElementById("otherDescription").hidden = false;
             document.getElementById("poolArea").hidden = true;
+            document.getElementById("poolAreaErr").remove();
             document.getElementById("numberFloor").hidden = false;
             document.getElementById("facilityFree").hidden = true;
+            document.getElementById("facilityFreeErr").remove();
         } else if (facilityTypeId.value == 3) {
             document.getElementById("standardRoom").hidden = true;
+            document.getElementById("standardRoomErr").remove();
             document.getElementById("otherDescription").hidden = true;
+            document.getElementById("otherDescriptionErr").remove();
             document.getElementById("poolArea").hidden = true;
+            document.getElementById("poolAreaErr").remove();
             document.getElementById("numberFloor").hidden = true;
+            document.getElementById("numberFloorErr").remove();
             document.getElementById("facilityFree").hidden = false;
         } else {
             document.getElementById("standardRoom").hidden = true;
+            document.getElementById("standardRoomErr").remove();
             document.getElementById("otherDescription").hidden = true;
+            document.getElementById("otherDescriptionErr").remove();
             document.getElementById("poolArea").hidden = true;
+            document.getElementById("poolAreaErr").remove();
             document.getElementById("numberFloor").hidden = true;
+            document.getElementById("numberFloorErr").remove();
             document.getElementById("facilityFree").hidden = true;
+            document.getElementById("facilityFreeErr").remove();
         }
     }
 </script>

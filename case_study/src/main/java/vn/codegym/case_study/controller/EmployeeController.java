@@ -14,6 +14,7 @@ import vn.codegym.case_study.dto.EmployeeDto;
 import vn.codegym.case_study.model.*;
 import vn.codegym.case_study.service.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,6 +62,7 @@ public class EmployeeController {
         BeanUtils.copyProperties(employeeDto, employee);
 
         employee.setSalary(Double.parseDouble(employeeDto.getSalary()));
+        employee.setBirthDay(LocalDate.parse(employeeDto.getBirthDay()));
         employee.setPosition(new Position(Integer.parseInt(employeeDto.getPosition())));
         employee.setEducationDegree(new EducationDegree(Integer.parseInt(employeeDto.getEducationDegree())));
         employee.setDivision(new Division(Integer.parseInt(employeeDto.getDivision())));
@@ -84,6 +86,8 @@ public class EmployeeController {
         if (currentEmployee == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+
+        currentEmployee.setBirthDay(LocalDate.parse(employeeDto.getBirthDay()));
 
         currentEmployee.setSalary(Double.parseDouble(employeeDto.getSalary()));
 

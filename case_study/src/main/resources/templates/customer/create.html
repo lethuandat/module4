@@ -193,9 +193,8 @@
                             <tr>
                                 <th>Giới tính:</th>
                                 <td>
-                                    <input class="form-check-input" type="radio" th:field="*{gender}" value="0">Nữ
-                                    <input class="form-check-input" type="radio" th:field="*{gender}" value="1">Nam
-                                    <input class="form-check-input" type="radio" th:field="*{gender}" value="2">Khác
+                                    <input class="form-check-input" type="radio" th:field="*{gender}" value="false">Nữ
+                                    <input class="form-check-input" type="radio" th:field="*{gender}" value="true">Nam
                                     <span class="text-danger" th:if="${#fields.hasErrors('gender')}"
                                           th:errors="*{gender}"></span>
                                 </td>

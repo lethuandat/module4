@@ -1,7 +1,5 @@
 package vn.codegym.case_study.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import java.util.Set;
 

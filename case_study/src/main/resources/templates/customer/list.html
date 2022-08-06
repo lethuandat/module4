@@ -191,13 +191,12 @@
                         <tbody>
                         <tr th:each="customer, i  : ${customerList}">
 
-                            <td th:text="${i.count}"></td>
+                            <td th:text="${i.count} + 5 * ${customerList.number}"></td>
                             <td th:text="${customer.customerType == null ? '' : customer.customerType.getCustomerTypeName()}"></td>
                             <td th:text="${customer.getName()}"></td>
                             <td th:text="${customer.getBirthDay()}"></td>
-                            <td th:if="${customer.getGender() == 1}">Nam</td>
-                            <td th:if="${customer.getGender() == 0}">Nữ</td>
-                            <td th:if="${customer.getGender() == 2}">Khác</td>
+                            <td th:if="${customer.getGender() == true}">Nam</td>
+                            <td th:if="${customer.getGender() == false}">Nữ</td>
                             <td th:text="${customer.getIdCard()}"></td>
                             <td th:text="${customer.getPhone()}"></td>
                             <td th:text="${customer.getEmail()}"></td>

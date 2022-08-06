@@ -7,7 +7,7 @@ public class FacilityDto {
     private Integer id;
 
     @NotBlank(message = "*Không được để trống!")
-    @Pattern(message = "*Không đúng định dạng (VD: Lê Văn An)", regexp = "^([A-Z\\p{L}]{1}[a-z\\p{L}]*)+(\\s([A-Z\\p{L}]{1}[a-z\\p{L}]*))*$")
+    @Pattern(message = "*Không đúng định dạng", regexp = "^([A-Z\\p{L}]{1}[a-z\\p{L}]*)+(\\s([A-Z\\p{L}]{1}[a-z\\p{L}]*))*$")
     private String name;
 
     @NotBlank(message = "*Không được để trống!")

@@ -18,6 +18,7 @@ import vn.codegym.case_study.dto.ContractDto;
 import vn.codegym.case_study.model.*;
 import vn.codegym.case_study.service.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -94,6 +95,8 @@ public class ContractController {
         Contract contract = new Contract();
         BeanUtils.copyProperties(contractDto, contract);
 
+        contract.setStartDate(LocalDate.parse(contractDto.getStartDate()));
+        contract.setEndDate(LocalDate.parse(contractDto.getEndDate()));
         contract.setDeposit(Double.parseDouble(contractDto.getDeposit()));
         contract.setFacility(new Facility(Integer.parseInt(contractDto.getFacility())));
         contract.setCustomer(new Customer(Integer.parseInt(contractDto.getCustomer())));

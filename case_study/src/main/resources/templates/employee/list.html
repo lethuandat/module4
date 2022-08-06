@@ -179,9 +179,9 @@
                                     $("#phone").val(data.phone);
                                     $("#email").val(data.email);
                                     $("#address").val(data.address);
-                                    $("#position").val(data.position.positionName);
-                                    $("#educationDegree").val(data.educationDegree.educationDegreeName);
-                                    $("#division").val(data.division.divisionName);
+                                    $("#position").val(data.position);
+                                    $("#educationDegree").val(data.educationDegree);
+                                    $("#division").val(data.division);
                                 },
                                 error: function (error) {
                                     alert(error);
@@ -290,7 +290,7 @@
                         <tbody>
                         <tr th:each="employee, i  : ${employeeList}">
 
-                            <td th:text="${i.count}"></td>
+                            <td th:text="${i.count} + 5 * ${employeeList.number}"></td>
                             <td th:text="${employee.name}"></td>
                             <td th:text="${employee.birthDay}"></td>
 

@@ -3,6 +3,7 @@ package vn.codegym.case_study.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
@@ -11,11 +12,19 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private String birthDay;
+    private LocalDate birthDay;
+
+    @Column(unique = true)
     private String idCard;
+
     private Double salary;
+
+    @Column(unique = true)
     private String phone;
+
+    @Column(unique = true)
     private String email;
+
     private String address;
 
     @ManyToOne
@@ -43,7 +52,8 @@ public class Employee {
     public Employee(Integer id) {
         this.id = id;
     }
-    public Employee(Integer id, String name, String birthDay, String idCard, Double salary, String phone, String email, String address, Position position, EducationDegree educationDegree, Division division, User username, Set<Contract> contract) {
+
+    public Employee(Integer id, String name, LocalDate birthDay, String idCard, Double salary, String phone, String email, String address, Position position, EducationDegree educationDegree, Division division, User username, Set<Contract> contract) {
         this.id = id;
         this.name = name;
         this.birthDay = birthDay;
@@ -57,20 +67,6 @@ public class Employee {
         this.division = division;
         this.username = username;
         this.contract = contract;
-    }
-
-    public Employee(String name, String birthDay, String idCard, Double salary, String phone, String email, String address, Position position, EducationDegree educationDegree, Division division, User username) {
-        this.name = name;
-        this.birthDay = birthDay;
-        this.idCard = idCard;
-        this.salary = salary;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.position = position;
-        this.educationDegree = educationDegree;
-        this.division = division;
-        this.username = username;
     }
 
     public Integer getId() {
@@ -89,11 +85,11 @@ public class Employee {
         this.name = name;
     }
 
-    public String getBirthDay() {
+    public LocalDate getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(String birthDay) {
+    public void setBirthDay(LocalDate birthDay) {
         this.birthDay = birthDay;
     }
 

@@ -18,6 +18,7 @@ import vn.codegym.case_study.model.CustomerType;
 import vn.codegym.case_study.service.CustomerService;
 import vn.codegym.case_study.service.CustomerTypeService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -58,7 +59,8 @@ public class CustomerController {
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerDto, customer);
 
-        customer.setGender(Integer.parseInt(customerDto.getGender()));
+        customer.setGender(Boolean.parseBoolean(customerDto.getGender()));
+        customer.setBirthDay(LocalDate.parse(customerDto.getBirthDay()));
         customer.setCustomerType(new CustomerType(Integer.parseInt(customerDto.getCustomerType())));
 
         customerService.save(customer);
@@ -81,10 +83,12 @@ public class CustomerController {
             model.addAttribute("customerTypeList", customerTypeList);
             return "/customer/edit";
         }
+
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerDto, customer);
 
-        customer.setGender(Integer.parseInt(customerDto.getGender()));
+        customer.setGender(Boolean.parseBoolean(customerDto.getGender()));
+        customer.setBirthDay(LocalDate.parse(customerDto.getBirthDay()));
         customer.setCustomerType(new CustomerType(Integer.parseInt(customerDto.getCustomerType())));
 
         customerService.save(customer);

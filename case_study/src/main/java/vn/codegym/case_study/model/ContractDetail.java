@@ -1,7 +1,5 @@
 package vn.codegym.case_study.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 
 @Entity(name = "contract_detail")

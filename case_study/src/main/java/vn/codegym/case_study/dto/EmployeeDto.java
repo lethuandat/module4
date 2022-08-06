@@ -1,10 +1,5 @@
 package vn.codegym.case_study.dto;
 
-import vn.codegym.case_study.model.Division;
-import vn.codegym.case_study.model.EducationDegree;
-import vn.codegym.case_study.model.Position;
-import vn.codegym.case_study.model.User;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -18,7 +13,6 @@ public class EmployeeDto {
 
     @NotBlank(message = "*Không được để trống!")
     private String birthDay;
-
 
     @NotBlank(message = "*Không được để trống!")
     @Pattern(message = "*Không đúng định dạng (XXXXXXXXX với X là số từ 0 - 9)", regexp = "\\d{9}")

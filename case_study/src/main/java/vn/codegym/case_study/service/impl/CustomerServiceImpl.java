@@ -33,7 +33,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void save(Customer customer) {
-        customer.setCustomerType((CustomerType) customer.getCustomerType() );
         customerRepository.save(customer);
     }
 
