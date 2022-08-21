@@ -15,7 +15,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-
     @Override
     public Page<Employee> findAll(Pageable pageable, String keyword) {
         return employeeRepository.findAll(pageable, "%" + keyword + "%");

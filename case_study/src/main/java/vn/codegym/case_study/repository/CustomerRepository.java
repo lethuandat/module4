@@ -11,6 +11,17 @@ import vn.codegym.case_study.model.Customer;
 @Transactional
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
-    @Query(value = "select * from customer where customer_name like :keyword or customer_email like :keyword or customer_address like :keyword", nativeQuery = true)
+//    @Query(value = "select * " +
+//            "from customer " +
+//            "join customer_type on customer_type.customer_type_id = customer.customer_type_id " +
+//            "where customer.customer_name like :keyword or " +
+//            "customer.customer_email like :keyword or " +
+//            "customer.customer_address like :keyword or " +
+//            "customer.customer_id_card like :keyword or " +
+//            "customer.customer_phone like :keyword or " +
+//            "customer.customer_birthday like :keyword or " +
+//            "customer_type.customer_type_name like :keyword ", nativeQuery = true)
+
+    @Query(value = "select * from customer where customer_name like :keyword or customer_address like :keyword or customer_email like :keyword", nativeQuery = true)
     Page<Customer> findAll(Pageable pageable, @Param("keyword") String keyword);
 }

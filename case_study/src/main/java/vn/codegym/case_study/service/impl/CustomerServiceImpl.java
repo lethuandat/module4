@@ -5,16 +5,20 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import vn.codegym.case_study.model.Customer;
-import vn.codegym.case_study.model.CustomerType;
 import vn.codegym.case_study.repository.CustomerRepository;
 import vn.codegym.case_study.service.CustomerService;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
     CustomerRepository customerRepository;
+
+    public CustomerServiceImpl(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     @Override
     public Page<Customer> findAll(Pageable pageable, String keyword) {

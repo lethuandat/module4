@@ -1,10 +1,22 @@
 package vn.codegym.case_study.dto;
 
+
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+import vn.codegym.case_study.model.Customer;
+import vn.codegym.case_study.repository.CustomerRepository;
+import vn.codegym.case_study.service.CustomerService;
+import vn.codegym.case_study.service.impl.CustomerServiceImpl;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
-public class CustomerDto {
+public class CustomerDto implements Validator {
     private Integer id;
 
     @NotBlank(message = "*Không được để trống!")
@@ -120,5 +132,37 @@ public class CustomerDto {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        CustomerDto customerDto = (CustomerDto) target;
+//        List<Customer> customerList = customerService.getList();
+
+        if (Period.between(LocalDate.parse(customerDto.getBirthDay(), formatter), LocalDate.now()).getDays() < 6570) {
+            errors.rejectValue("birthDay", "birthday.fail", "*Ngày nhập lỗi");
+        }
+
+//        for (Customer item : customerList) {
+//            if (item.getEmail().equals(customerDto.getEmail())) {
+//                errors.rejectValue("email", "email.existed", "*Email đã tồn tại.");
+//            }
+//
+//            if (item.getIdCard().equals(customerDto.getIdCard())) {
+//                errors.rejectValue("idCard", "idCard.existed", "*Số CMND đã tồn tại.");
+//            }
+//
+//            if (item.getPhone().equals(customerDto.getPhone())) {
+//                errors.rejectValue("phone", "phone.existed", "*Số điện thoại đã tồn tại.");
+//            }
+//        }
+
     }
 }

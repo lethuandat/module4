@@ -43,7 +43,7 @@ public class ContractController {
     EmployeeService employeeService;
 
     @GetMapping
-    public String showPage(@PageableDefault(value = 1005) Pageable pageable, Model model) {
+    public String showPage(@PageableDefault(value = 5) Pageable pageable, Model model) {
         Page<Contract> contractList = contractService.findAll(pageable);
         List<Facility> facilityList = facilityService.getList();
         List<Customer> customerList = customerService.getList();
@@ -80,6 +80,10 @@ public class ContractController {
 
     @PostMapping("/create")
     public String create(@Validated @ModelAttribute("contractDto") ContractDto contractDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+        if (!contractDto.getStartDate().equals("") && !contractDto.getEndDate().equals("")) {
+            new ContractDto().validate(contractDto, bindingResult);
+        }
+
         if (bindingResult.hasFieldErrors()) {
             List<Facility> facilityList = facilityService.getList();
             List<Customer> customerList = customerService.getList();

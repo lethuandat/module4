@@ -194,7 +194,7 @@
                         <tbody>
                         <tr th:each="facility, i  : ${facilityList}">
 
-                            <td th:text="${i.count} + 5 * ${facilityList.number}"></td>
+                            <td th:text="${i.count + facilityList.size * facilityList.number}"></td>
                             <td th:text="${facility.name}"></td>
                             <td th:text="${facility.area}"></td>
                             <td th:text="${#numbers.formatCurrency(facility.cost)}"></td>

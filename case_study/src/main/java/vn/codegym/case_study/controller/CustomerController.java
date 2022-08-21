@@ -1,11 +1,11 @@
 package vn.codegym.case_study.controller;
 
-import jdk.nashorn.internal.runtime.options.Option;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,7 +20,6 @@ import vn.codegym.case_study.service.CustomerTypeService;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -50,6 +49,10 @@ public class CustomerController {
 
     @PostMapping("/create")
     public String create(@Validated @ModelAttribute("customerDto") CustomerDto customerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+        if (!customerDto.getBirthDay().equals("")) {
+            new CustomerDto().validate(customerDto, bindingResult);
+        }
+
         if (bindingResult.hasFieldErrors()) {
             List<CustomerType> customerTypeList = customerTypeService.findAll();
             model.addAttribute("customerTypeList", customerTypeList);

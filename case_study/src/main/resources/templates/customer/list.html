@@ -191,7 +191,7 @@
                         <tbody>
                         <tr th:each="customer, i  : ${customerList}">
 
-                            <td th:text="${i.count} + 5 * ${customerList.number}"></td>
+                            <td th:text="${i.count + customerList.size * customerList.number}"></td>
                             <td th:text="${customer.customerType == null ? '' : customer.customerType.getCustomerTypeName()}"></td>
                             <td th:text="${customer.getName()}"></td>
                             <td th:text="${customer.getBirthDay()}"></td>
